@@ -1,0 +1,119 @@
+:root {
+  --PFM-primary: #609966;
+  --PFM-secondary: #c4d7b2;
+  --PFM-font-color: #212529;
+  --PFM-main-bg-color: #e1ecc8;
+  --PFM-header-color: #40513b;
+  --PFM-backdrop-bg-shadow: #e1ecc87d;
+  --PFM-light-yellow-color: #ffc85c;
+  --PFM-light-orange-color: #ac4425;
+  --orange: 0, 100, 0;
+  --orange-light: rgba(var(--orange), 4);
+}
+[data-theme="dark"] {
+  --PFM-main-bg-color: #212529;
+  /* --PFM-primary: #212229; */
+  --PFM-secondary: #282c34;
+  --PFM-header-color: #b6bdca;
+  --PFM-font-color: #f7ffe5;
+
+  --base00: #282c34;
+  --base01: #353b45;
+  --base02: #3e4451;
+  --base03: #868e96;
+  --base04: #565c64;
+  --base05: #abb2bf;
+  --base06: #b6bdca;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1.2rem;
+  line-height: 1.3;
+  font-family: "Poppins", "sans-sarif";
+  background-color: var(--PFM-main-bg-color);
+  color: var(--PFM-font-color);
+
+  /* transition: 0.3s ease; */
+}
+
+body a {
+  text-decoration: none;
+  color: var(--PFM-font-color);
+}
+
+body ul {
+  list-style: none;
+}
+
+/*
+    Containers css..
+*/
+
+.container {
+  width: 100%;
+  /* height: 100vh; */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+@media (min-width: 475px) {
+  .container {
+    width: 475px;
+  }
+}
+
+@media (min-width: 640px) {
+  .container {
+    width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    width: 1280px;
+  }
+}
+@media (min-width: 1536px) {
+  .container {
+    width: 1536px;
+  }
+}
+
+.header-color {
+  color: var(--PFM-header-color);
+}
+.light-orage-color {
+  color: var(--PFM-light-orange-color) !important;
+}
+.light-yellow-color {
+  color: var(--PFM-light-yellow-color) !important;
+}
+.light-green-color {
+  color: var(--PFM-primary) !important;
+}
+.light-green-bg-color {
+  background-color: var(--PFM-secondary) !important;
+}
+.light-color-bg {
+  background-color: var(--PFM-backdrop-bg-shadow);
+}
+.p-color {
+  color: var(--PFM-header-color) !important;
+}
