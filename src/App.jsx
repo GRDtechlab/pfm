@@ -12,12 +12,14 @@ function App() {
       method:'GET'
     })
     let apiData = await data.json();
+    
     return apiData
   }
 
   useEffect( () => {
     const apiData = pfmApiData();
-    apiData.then(data => console.log({data}))
+    apiData.then(data => console.log( new Date (data[0].createdAt).toLocaleDateString()))
+
   },[])
 
   return (

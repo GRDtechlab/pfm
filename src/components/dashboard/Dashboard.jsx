@@ -1,7 +1,10 @@
+import { useState } from 'react';
+import Modal from '../modal/modal';
 import './dashboard.css';
+import Updatedashboard from '../update-dashboard/Updatedashboard';
 
 const Dashboard =() => {
-    
+    const [showModal,setShowModal] = useState(false);
     const month = ['January','February','March','April','June','July','August', 'September','October','November','December'];
     const currentMonth = month[new Date().getMonth() - 1];
     const currentYear = new Date().getFullYear();
@@ -26,7 +29,11 @@ const Dashboard =() => {
                 <span className="text">Download_PDF</span>
             </a>
         </div>
+        <div className='action-header'>
         <h3 className='header-color'> {currentMonth} {currentYear} </h3>
+            <i className='bi bi-plus add' onClick={()=>{setShowModal(true)}}></i>
+            <Modal open={showModal} setOpen={setShowModal} title='Update' content = {<Updatedashboard />} />
+        </div>
         <ul className="box-info">
             <li>
             <i className="bx bi bi-piggy-bank-fill"></i>
