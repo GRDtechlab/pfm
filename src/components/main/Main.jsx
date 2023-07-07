@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
+import { lazy } from 'react';
 import Sidebar from './Sidebar';
 import './main.css'
-import Dashboard from '../dashboard/Dashboard';
+
+const Dashboard = lazy(() => import('../dashboard/Dashboard' /*webpackChunkName: "Dashboard-Lazy-Load"*/));
+
 const Main = () => {
     const [open,setOpen] = useState(false)
 
@@ -14,7 +17,9 @@ const Main = () => {
                         <i className="bi bi-list"></i>
                     </div>
                 </div>
-                <Dashboard/>
+                <Suspense fallback={<h1>Loading...</h1>}>
+                    <Dashboard/>
+                </Suspense>
         </main>
             
         </>
