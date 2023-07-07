@@ -1,0 +1,11 @@
+.input-with-icon {
+  border-radius: 10px;
+  display: flex;
+  background-color: var(--PFM-primary);
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+}
+.input-with-icon:hover {
+  border: 1px solid var(--PFM-font-color);
+}

@@ -161,9 +161,69 @@ body ul {
 }
 
 /*
+    COmmon form css..
+*/
+
+input,
+textarea {
+  font-size: 18px;
+  padding: 10px 10px 10px 8px;
+  display: block;
+  width: 320px;
+  border: none;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+input {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+input:hover {
+  border: 1px solid transparent;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 1px solid transparent;
+}
+input:focus ~ label,
+input:valid ~ label,
+textarea:focus ~ label,
+textarea:valid ~ label {
+  top: -5px;
+  font-size: 12px;
+  color: #000;
+  left: 11px;
+}
+input:focus ~ .bar:before,
+textarea:focus ~ .bar:before {
+  width: 320px;
+}
+
+input[type="password"] {
+  letter-spacing: 0.3em;
+}
+
+/*
     Margin common class
 */
 
 .mr-1 {
   margin-right: 8px;
+}
+
+/*
+    Modal css...
+*/
+
+.modal-bottom-action {
+  position: sticky;
+  bottom: 0;
+  border-top: 1px solid var(--PFM-main-bg-color);
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+.modal-action-group {
+  margin: 0.5em;
 }

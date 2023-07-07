@@ -1,21 +1,21 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import Modal from '../modal/modal';
 import './dashboard.css';
 import Updatedashboard from '../update-dashboard/Updatedashboard';
+import currency_formater from '../../Utils/currency-formatter';
 
 const Dashboard =() => {
     const [showModal,setShowModal] = useState(false);
+
+    const [dashboardData, setDashboardData] =useState({total_savings:5300, salary_pm:19930, limit_pm:2000, availableBalance:8000})
     const month = ['January','February','March','April','June','July','August', 'September','October','November','December'];
     const currentMonth = month[new Date().getMonth() - 1];
     const currentYear = new Date().getFullYear();
 
-    const formatter = new Intl.NumberFormat('en-IN', {
-        style: 'currency',
-        currency: 'INR',
-        // These options are needed to round to whole numbers if that's what you want.
-        //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-        //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-      });
+    const onSubmit = (dashboardUpdateData) =>{
+            console.log('handle submit called ', dashboardUpdateData)
+            setDashboardData(dashboardUpdateData)
+    }
 
     return <>
     <div className='main-dashboard'>
@@ -32,20 +32,21 @@ const Dashboard =() => {
         <div className='action-header'>
         <h3 className='header-color'> {currentMonth} {currentYear} </h3>
             <i className='bi bi-plus add' onClick={()=>{setShowModal(true)}}></i>
-            <Modal open={showModal} setOpen={setShowModal} title='Update' content = {<Updatedashboard />} />
+            <Modal  open={showModal} setOpen={setShowModal} title='Update' content = {<Updatedashboard  dashboardData={dashboardData} onSubmit={onSubmit} closeModal={setShowModal} />} />
+                        
         </div>
         <ul className="box-info">
             <li>
             <i className="bx bi bi-piggy-bank-fill"></i>
             <span className="text">
-                <h3> {formatter.format(5300)} </h3>
+                <h3> {currency_formater.format(dashboardData.total_savings)} </h3>
                 <p className='p-color'>Total Savings</p>
             </span>
             </li>
             <li>
             <i className="bx bi bi-bar-chart-line-fill light-orage-color"></i>
             <span className="text">
-                 <h3>{formatter.format(2000)}</h3> {/* <i className="bi bi-currency-rupee"></i> */}
+                 <h3>{currency_formater.format(dashboardData.limit_pm)}</h3> {/* <i className="bi bi-currency-rupee"></i> */}
                 <p className='p-color'>Limit p<span className='seperator'>/</span>m to be saved</p>
             </span> 
             {/* Per month limit to save */}
@@ -53,14 +54,14 @@ const Dashboard =() => {
             <li>
             <i className="bx bi bi-calendar2-fill light-green-color  "></i>
             <span className="text">
-                <h3> {formatter.format(19950)}</h3>
+                <h3> {currency_formater.format(dashboardData.salary_pm)}</h3>
                 <p className='p-color'>Salary p<span className='seperator'>/</span>m</p>
             </span>
             </li>
             <li>
             <i className="bx bi bi-wallet-fill light-yellow-color "></i>
             <span className="text">
-                <h3>{formatter.format(8000)}</h3>
+                <h3>{currency_formater.format(dashboardData.availableBalance)}</h3>
                 <p className='p-color'>Current Balance</p>
             </span>
             </li>

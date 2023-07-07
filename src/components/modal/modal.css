@@ -60,18 +60,15 @@
   overflow-y: scroll;
   padding: 1rem;
 }
-.modal-content .modal-bottom-action {
-  position: sticky;
-  bottom: 0;
-  border-top: 1px solid var(--PFM-main-bg-color);
-  display: flex;
-  justify-content: flex-end;
-}
-.modal-content .modal-action-group {
-  margin: 0.5em;
-}
+
 @media screen and (max-width: 1024px) {
   .modal-container {
     top: -70px;
+  }
+}
+
+@media (max-width: 475px) {
+  .modal-item {
+    width: 100%;
   }
 }

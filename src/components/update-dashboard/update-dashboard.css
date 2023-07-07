@@ -1,0 +1,23 @@
+.update-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 425px) {
+  .group {
+    width: 100%;
+  }
+  input {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .group {
+    width: 100%;
+  }
+  input {
+    width: 100% !important;
+  }
+}
