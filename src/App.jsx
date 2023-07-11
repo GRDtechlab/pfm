@@ -1,29 +1,36 @@
-import { useEffect } from 'react';
-import './App.css'
-import Footer from './components/footer/Footer';
-import Main from './components/main/Main';
-import Navbar from './components/navbar/Navbar'
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { useDashboardDataQuery } from './services/pfm-api';
+import './App.css';
+
+import { Suspense, lazy} from 'react';
+import {  RouterProvider, createBrowserRouter} from 'react-router-dom';
+
+import Main from './components/main/Main';
+const Dashboard = lazy(() => import('./components/dashboard/Dashboard' /*webpackChunkName: "Dashboard-Lazy-Load"*/));
 
 function App() {
-  const {data,error,isLoading,isFetching, isSuccess} = useDashboardDataQuery({user_id:'64a92ec2c0b4c1328f8089b7'});
 // 64a92ec2c0b4c1328f8089b7 -- USERID to be passed to check dashboard of the related user.
+const router = createBrowserRouter([
+  {
+    path:'/',element:<Main/>,
+    children:[
+      {
+        path:'/',
+        element:<Suspense fallback={<h1 className='ml-3'>Loading Dashboard...</h1>}>
+                  { <Dashboard /> }
+                </Suspense>
+      },
+      {
+        path:'/list',
+        element:<h1>List</h1>
+      }
+    ]
+  }
+])
   return (
-    <>
-      <div className='container'>
-        <Navbar />
-        {
-          isLoading && <h1>Data is Loading...</h1>
-        }
-        {
-          error && <div> {error.status === 'FETCH_ERROR' && <h1>Server is not Responding. Check after sometimes.</h1>}  </div>
-        }
-        {data && <Main data={data} /> }
-        <Footer />  
-      </div>
-    </>
-  )
+      <>
+        <RouterProvider router={router} />
+      </>
+    )
 }
 
 export default App

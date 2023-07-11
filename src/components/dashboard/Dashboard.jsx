@@ -1,15 +1,20 @@
-import { useState } from 'react';
-import Modal from '../modal/modal';
 import './dashboard.css';
+
+import { useState } from 'react';
+
+import Modal from '../modal/modal';
 import Updatedashboard from '../update-dashboard/Updatedashboard';
 import currency_formater from '../../Utils/currency-formatter';
+
 import { useDashboardDataQuery, useNewDashboardDataMutation, useUpdateDashboardDataMutation } from '../../services/pfm-api';
 import AddDashboard from '../add-dashboard/AddDashboard';
 
 const Dashboard =() => {
+    const {data,error,isLoading} = useDashboardDataQuery({user_id:'64a92ec2c0b4c1328f8089b7'});
     const [showModal,setShowModal] = useState(false);
-    const  {dashboardData} = useDashboardDataQuery({user_id:'64a92ec2c0b4c1328f8089b7'}, {
-        // Here selectFromResult is used to find out alredy availale data from api. In our case we called data from app.jsx,
+    const {dashboardData} = useDashboardDataQuery({user_id:'64a92ec2c0b4c1328f8089b7'}, {
+        // At present this is not required but for reference I added this selectFromResult...
+        // Here selectFromResult is used to find out alredy availale data from api. In our case we called data from Main.jsx,
         // then we used this data and add condition to check if its array of not then we need only object of that data.
         selectFromResult:({data})=>{
             if(!Array.isArray(data)){
@@ -40,15 +45,21 @@ const Dashboard =() => {
         await dashboardAdd(finalAddDashboardRecord)
     }
 
-    if( dashboardData.length === 0){
-        return <div>
-                 <h1 className='ml-3'>No Dashboard data found.</h1>
-                 <button className='btn btn-primary' onClick={()=>{setShowModal(true)}}>Add New Record</button>
-                 <Modal  open={showModal} setOpen={setShowModal} title='Add New Record' content = {<AddDashboard  onSubmit={addNewDashboardData} closeModal={setShowModal} />}  />     
-                </div>
-    }else{
+    
+       
+    if (error) return  <div> {error.status === 'FETCH_ERROR' && <h1>Server is not Responding. Check after sometimes.</h1>}  </div>
+    
+    if(isLoading) return <h1 className='ml-3'>Data is fetching </h1>
 
-    return <>
+    if(data && data.length === 0){
+        return <div>
+                      <h1 className='ml-3'>No Dashboard data found.</h1>
+                      <button className='btn btn-primary' onClick={()=>{setShowModal(true)}}>Add New Record</button>
+                      <Modal  open={showModal} setOpen={setShowModal} title='Add New Record' content = {<AddDashboard  onSubmit=      {addNewDashboardData} closeModal={setShowModal} />}  />     
+                     </div>
+    }
+
+    return  (data && data.length !== 0) && <>
     <div className='main-dashboard'>
         <div className="head-title">
             <div className="left">
@@ -62,7 +73,7 @@ const Dashboard =() => {
         <div className='action-header'>
         <h3 className='header-color'> {currentMonth} {currentYear} </h3>
             <i className='bi bi-plus add' onClick={()=>{setShowModal(true)}}></i>
-            <Modal  open={showModal} setOpen={setShowModal} title='Update' content = {<Updatedashboard  dashboardData={dashboardData} onSubmit={onSubmit} closeModal={setShowModal} />} />            
+            <Modal  open={showModal} setOpen={setShowModal} title='Update' content = {<Updatedashboard  dashboardData={data[0]} onSubmit={onSubmit} closeModal={setShowModal} />} />            
         </div>
         <ul className="box-info">
             <li>
@@ -98,7 +109,6 @@ const Dashboard =() => {
 
     </div>
     </>
-    }
 }
 
 export default Dashboard;

@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
-import logo from '../../assets/logo.jpg'
 import './Navbar.css'
+
+import { useEffect, useState } from 'react'
+import {Link} from 'react-router-dom';
+import logo from '../../assets/logo.jpg'
 
 const Navbar = () => {
     const [open,setOpen] = useState(false);
@@ -28,8 +30,9 @@ const Navbar = () => {
     return (
         <header>
         <nav className='navbar'>
-            <img src={logo} className='logo'/>
-            
+            <Link to='/'>
+                <img src={logo} className='logo'/>
+            </Link>
             <ul className={ open ? ['navbar-menu', 'active-menu'].join(' ') : 'navbar-menu'}>
                 <li><a href='#'>Home </a></li>
                 <li><a>About</a></li>

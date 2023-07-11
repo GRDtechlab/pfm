@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom'
 import './sidebar.css'
 
 const Sidebar = (props) =>{    
@@ -15,8 +16,10 @@ const Sidebar = (props) =>{
                         </div>
                     </div>
                     <div className="menu">
-                        <a href="#"> <i className="bi bi-house-fill"></i> Home</a>
-                        <a href="#"> <i className="fa fa-newspaper-o"></i> List</a>
+                    <Link to='/'> <i className="bi bi-house-fill"></i> Home </Link>
+                        {/* <a href="#"> <i className="bi bi-house-fill"></i> Home</a> */}
+                        {/* <a href="#"> <i className="fa fa-newspaper-o"></i> List</a> */}
+                        <Link to='/list'> List </Link>
                         <a href="#"> <i className="fa fa-bar-chart-o"></i> Performance</a>
                         <a href="#"> <i className="fa fa-bookmark-o"></i> Bookmarks</a>
                         <a href="#"> <i className="fa fa-envelope-o"></i> Message</a>
