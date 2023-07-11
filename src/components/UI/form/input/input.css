@@ -9,3 +9,7 @@
 .input-with-icon:hover {
   border: 1px solid var(--PFM-font-color);
 }
+.input-with-icon:focus-within {
+  box-shadow: var(--PFM-header-color) 0px 0px 0px 3px;
+  border-color: rgb(255, 255, 255);
+}

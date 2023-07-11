@@ -5,7 +5,7 @@ import './main.css'
 
 const Dashboard = lazy(() => import('../dashboard/Dashboard' /*webpackChunkName: "Dashboard-Lazy-Load"*/));
 
-const Main = () => {
+const Main = ({data}) => {
     const [open,setOpen] = useState(false)
 
     return(
@@ -17,8 +17,8 @@ const Main = () => {
                         <i className="bi bi-list"></i>
                     </div>
                 </div>
-                <Suspense fallback={<h1>Loading...</h1>}>
-                    <Dashboard/>
+                <Suspense fallback={<h1 className='ml-3'>Content is Loading...</h1>}>
+                    <Dashboard data={data} />
                 </Suspense>
         </main>
             

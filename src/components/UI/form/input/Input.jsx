@@ -8,7 +8,7 @@ const Input = ({name, state, handleOnChange}) =>{
         <i className="bi bi-currency-rupee"></i>
         <input type="text" required="required" 
             name={name}
-            defaultValue={state}
+            value={state}
             onChange={handleOnChange}/>
     </div>
     </>
