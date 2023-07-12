@@ -38,7 +38,7 @@
   font-weight: bolder;
 }
 .menu a:hover {
-  color: var(--PFM-primary);
+  color: var(--PFM-primary) !important;
   background-color: var(--PFM-main-bg-color);
   border-radius: 10px;
 }
@@ -75,6 +75,18 @@
   width: 220px;
   z-index: 100;
   /* position: relative; */
+}
+
+.sub-menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.active-link {
+  color: var(--PFM-light-orange-color) !important;
+  background-color: var(--PFM-main-bg-color);
+  border-radius: 10px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -133,5 +145,11 @@
   }
   .show-backdrop {
     left: 300px;
+  }
+  .hide-submenu {
+    display: none;
+  }
+  .show-submenu {
+    display: block;
   }
 }

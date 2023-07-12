@@ -47,7 +47,7 @@ const Dashboard =() => {
 
     
        
-    if (error) return  <div> {error.status === 'FETCH_ERROR' && <h1>Server is not Responding. Check after sometimes.</h1>}  </div>
+    if (error) return  <div> {error.status === 'FETCH_ERROR' && <h1 className='ml-3'>Server is not Responding. Check after sometimes.</h1>}  </div>
     
     if(isLoading) return <h1 className='ml-3'>Data is fetching </h1>
 
