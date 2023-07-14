@@ -2,10 +2,10 @@
 
 import './input.css';
 
-const Input = ({name, state, handleOnChange}) =>{
+const Input = ({name, state, icon,handleOnChange}) =>{
     return <>
     <div className='input-with-icon'>
-        <i className="bi bi-currency-rupee"></i>
+       {icon ? icon :<i className="bi bi-currency-rupee"></i> }  
         <input type="text" required="required" 
             name={name}
             value={state}

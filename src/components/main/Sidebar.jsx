@@ -5,7 +5,7 @@ import './sidebar.css'
 const Sidebar = (props) =>{    
     return (
         <>
-                <div className= { props.open ? ['sidebar','sidebar-show',' container'].join(' ') : ['sidebar','container'].join(' ')}>
+                <div className= { props.open ? ['sidebar shadow','sidebar-show',' container'].join(' ') : ['sidebar shadow','container'].join(' ')}>
                     <div className="profile">
                         {props.open && <i className="bi bi-x-lg sidebar-close" onClick={()=> props.setOpen(false)}></i> }
                         <i className="bi bi-person-fill"></i>

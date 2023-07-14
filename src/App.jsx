@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element:<MainLayout/>,
     children:[
       {
-        path:'/',
+        index:true,
         element:<Suspense fallback={<h1 className='ml-3'>Loading Dashboard...</h1>}>
                   { <Dashboard /> }
                 </Suspense>

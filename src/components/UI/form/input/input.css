@@ -13,3 +13,7 @@
   box-shadow: var(--PFM-header-color) 0px 0px 0px 3px;
   border-color: rgb(255, 255, 255);
 }
+.bi {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}

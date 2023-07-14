@@ -143,6 +143,7 @@ body ul {
 .btn-light {
   background: #ededed;
   color: #000;
+  border-radius: 10px;
 }
 
 .btn-light:hover {
@@ -153,13 +154,47 @@ body ul {
 .btn-primary {
   background: var(--PFM-primary);
   color: #ffffff;
+  border-radius: 10px;
 }
 
 .btn-primary:hover {
   background: var(--PFM-header-color);
   color: #ffffff;
 }
-
+.btn-danger {
+  background: var(--PFM-light-orange-color);
+  color: #ffffff;
+  border-radius: 10px;
+}
+.btn-danger:hover {
+  background: var(--PFM-light-yellow-color);
+  color: #000;
+}
+.btn-icon {
+  padding: 0.5rem;
+  font-weight: bolder;
+  cursor: pointer;
+  /* font-size: 2.3rem; */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-icon:hover {
+  color: var(--PFM-primary);
+  background-color: var(--PFM-secondary);
+}
+.color-primary {
+  color: var(--PFM-primary);
+}
+.color-danger {
+  color: var(--PFM-light-orange-color);
+}
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
 /*
     COmmon form css..
 */

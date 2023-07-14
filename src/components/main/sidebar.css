@@ -4,8 +4,8 @@
   width: 250px !important;
   height: calc(100vh - 70px); /* 70px is height of top navbar */
   padding: 1rem;
-  border-right: 1px solid var(--PFM-font-color);
-  border-top-right-radius: 5px;
+  /* border-right: 1px solid var(--PFM-font-color); */
+  /* border-top-right-radius: 5px; */
   background-color: var(--PFM-secondary);
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
   /* position: fixed; */ /* removed this because of container position relative and adds new position absolute belwo. */
   position: absolute;
   /* left: 0; */ /* removed this because of container position relative */
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 

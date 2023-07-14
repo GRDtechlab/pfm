@@ -4,7 +4,7 @@ import Input from '../UI/form/input/Input';
 
 
 
-const AddDashboard = ({onSubmit, closeModal}) => {
+const AddDashboard = ({record,onSubmit, closeModal}) => {
     let defaultDashboardRecord = {limit_pm: 0,salary_pm:0,total_savings:0};
     const [state,setState] = useState(defaultDashboardRecord)
     const updateDashboardFormSubmit = (e) => {
@@ -14,13 +14,23 @@ const AddDashboard = ({onSubmit, closeModal}) => {
     const handleSubmit = () =>{
         onSubmit(state);
         setState(defaultDashboardRecord); // when we want to clear input fields then use this.
-        closeModal(false);
+        closeModal({open:false, data:defaultDashboardRecord});
     }
+
+    const onCancel = () =>{
+        setState(() => defaultDashboardRecord);
+        closeModal({open:false, data:defaultDashboardRecord})
+    }
+
+    useEffect(() => {
+        console.log('use-effetct' ,defaultDashboardRecord)
+        setState(() => defaultDashboardRecord)
+    },[record])
 
     return <>
         <form className='update-form-container'>
             <div className="group">
-                <label className='p-color'>Savings: <p className='header-color'>Start adding savings or 0</p> </label>
+                <label className='p-color'>Savings: <p className='header-color'>Start adding existing savings or 0</p> </label>
                 <Input name={'total_savings'} state={ state.total_savings} handleOnChange={updateDashboardFormSubmit} />
             </div>
             <div className="group">
@@ -34,7 +44,7 @@ const AddDashboard = ({onSubmit, closeModal}) => {
         </form>
         <div className='modal-bottom-action'>
                 <div className='modal-action-group'>
-                    <button className='btn btn-light mr-1' onClick={() => closeModal(false)}>Cancel</button>
+                    <button className='btn btn-light mr-1' onClick={onCancel}>Cancel</button>
                     <button className='btn btn-primary' onClick={handleSubmit }>Add</button>
                 </div>
         </div>

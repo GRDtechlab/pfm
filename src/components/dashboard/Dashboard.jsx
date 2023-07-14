@@ -10,8 +10,9 @@ import { useDashboardDataQuery, useNewDashboardDataMutation, useUpdateDashboardD
 import AddDashboard from '../add-dashboard/AddDashboard';
 
 const Dashboard =() => {
+    const defaultRecord = {availableBalance:0,total_savings:0,limit_pm:0,salary_pm:0};
     const {data,error,isLoading} = useDashboardDataQuery({user_id:'64a92ec2c0b4c1328f8089b7'});
-    const [showModal,setShowModal] = useState(false);
+    const [showModal,setShowModal] = useState({open:false,data:defaultRecord});
     const {dashboardData} = useDashboardDataQuery({user_id:'64a92ec2c0b4c1328f8089b7'}, {
         // At present this is not required but for reference I added this selectFromResult...
         // Here selectFromResult is used to find out alredy availale data from api. In our case we called data from Main.jsx,
@@ -40,13 +41,11 @@ const Dashboard =() => {
     }
 
     const addNewDashboardData = async (addDashboardRecord) =>{
-        const finalAddDashboardRecord = { total_savings:0, availableBalance:0, user_id:'64a92ec2c0b4c1328f8089b7',  ...addDashboardRecord }
+        const finalAddDashboardRecord = { availableBalance:addDashboardRecord.salary_pm - addDashboardRecord.limit_pm, user_id:'64a92ec2c0b4c1328f8089b7',  ...addDashboardRecord }
         console.log({finalAddDashboardRecord})
         await dashboardAdd(finalAddDashboardRecord)
     }
-
-    
-       
+   
     if (error) return  <div> {error.status === 'FETCH_ERROR' && <h1 className='ml-3'>Server is not Responding. Check after sometimes.</h1>}  </div>
     
     if(isLoading) return <h1 className='ml-3'>Data is fetching </h1>
@@ -54,8 +53,8 @@ const Dashboard =() => {
     if(data && data.length === 0){
         return <div>
                       <h1 className='ml-3'>No Dashboard data found.</h1>
-                      <button className='btn btn-primary' onClick={()=>{setShowModal(true)}}>Add New Record</button>
-                      <Modal  open={showModal} setOpen={setShowModal} title='Add New Record' content = {<AddDashboard  onSubmit=      {addNewDashboardData} closeModal={setShowModal} />}  />     
+                      <button className='btn btn-primary' onClick={()=>{setShowModal({open:true})}}>Add New Record</button>
+                      <Modal  open={showModal.open} defaultRecord={defaultRecord} setOpen={setShowModal} title='Add New Record' content = {<AddDashboard record={showModal.data} onSubmit= {addNewDashboardData} closeModal={setShowModal} />}  />     
                      </div>
     }
 
@@ -65,16 +64,18 @@ const Dashboard =() => {
             <div className="left">
                 <h1 className='header-color'>Dashboard </h1>
             </div>
-                        <a href="#" className="btn-download">
+                <a href="#" className="btn-download">
                 <i className="bx bxs-cloud-download"></i>
                 <span className="text">Download_PDF</span>
             </a>
         </div>
         <div className='action-header'>
         <h3 className='header-color'> {currentMonth} {currentYear} </h3>
-            <i className='bi bi-plus add' onClick={()=>{setShowModal(true)}}></i>
-            <Modal  open={showModal} setOpen={setShowModal} title='Update' content = {<Updatedashboard  dashboardData={data[0]} onSubmit={onSubmit} closeModal={setShowModal} />} />            
+        
+            <i className='bi bi-pencil add' onClick={()=>{setShowModal({open:true, data:data[0]})}}></i>
+            <Modal  open={showModal.open} defaultRecord={defaultRecord} setOpen={setShowModal} title='Update' content = {<Updatedashboard  dashboardData={showModal.data} onSubmit={onSubmit} closeModal={setShowModal} />} />            
         </div>
+        {/* <p className='p-color'>Last Updated At:</p> */}
         <ul className="box-info">
             <li>
             <i className="bx bi bi-piggy-bank-fill"></i>
