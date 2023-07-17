@@ -83,11 +83,6 @@
   justify-content: space-between;
   width: 100%;
 }
-.active-link {
-  color: var(--PFM-light-orange-color) !important;
-  background-color: var(--PFM-main-bg-color);
-  border-radius: 10px;
-}
 
 @media only screen and (max-width: 1024px) {
   .sidebar {

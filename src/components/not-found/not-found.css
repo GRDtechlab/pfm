@@ -1,0 +1,23 @@
+#not-found {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.not-found {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  width: 100%;
+  text-align: center;
+  padding: 0 15px;
+  line-height: 1.4;
+}
+.not-found h1 {
+  font-size: 168px;
+  margin: 0;
+  color: var(--PFM-primary);
+  text-transform: uppercase;
+}

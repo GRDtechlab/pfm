@@ -1,7 +1,7 @@
 import './Navbar.css'
 
 import { useEffect, useState } from 'react'
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import logo from '../../assets/logo.jpg'
 
 const Navbar = () => {
@@ -34,8 +34,16 @@ const Navbar = () => {
                 <img src={logo} className='logo'/>
             </Link>
             <ul className={ open ? ['navbar-menu', 'active-menu'].join(' ') : 'navbar-menu'}>
-                <li><a href='#'>Home </a></li>
-                <li><a>About</a></li>
+                
+                    <NavLink to='/' className={({isActive})=>(isActive ? 'active-link' : '')}>
+                        <li>Home </li>
+                    </NavLink>
+                
+                
+                    <NavLink to="/about" className={({isActive})=>(isActive ? 'active-link' : '')}>
+                        <li>About</li>
+                    </NavLink>
+                
                 <li><a>Contact</a></li>
                 <li><a>Login </a></li>
                 <li className='disabled'>

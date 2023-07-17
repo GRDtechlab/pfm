@@ -11,11 +11,13 @@
   grid-gap: 16px;
   flex-wrap: wrap;
 }
-
+.left {
+  padding: 0px !important;
+}
 .main-dashboard .head-title .left h1 {
   font-size: 36px;
   font-weight: 600;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .main-dashboard .head-title .btn-download {

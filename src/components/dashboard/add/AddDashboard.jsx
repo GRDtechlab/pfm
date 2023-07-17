@@ -1,8 +1,7 @@
 import './add-dashboard.css';
 import { useEffect, useState } from 'react';
-import Input from '../UI/form/input/Input';
 
-
+import Input from '../../UI/form/input/Input';
 
 const AddDashboard = ({record,onSubmit, closeModal}) => {
     let defaultDashboardRecord = {limit_pm: 0,salary_pm:0,total_savings:0};

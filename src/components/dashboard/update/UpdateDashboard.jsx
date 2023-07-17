@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react'
-import currency_formater from '../../Utils/currency-formatter'
-import './update-dashboard.css'
-import Input from '../UI/form/input/Input'
+import currency_formater from '../../../Utils/currency-formatter';
+import Input from '../../UI/form/input/Input';
+import './update-dashboard.css';
 
-const Updatedashboard = ({dashboardData, onSubmit, closeModal}) => {
+import { useEffect, useState } from 'react'
+
+const UpdateDashboard = ({dashboardData, onSubmit, closeModal}) => {
     const defaultRecord = {availableBalance:0,total_savings:0,limit_pm:0,salary_pm:0};
     const [state,setState] = useState(defaultRecord)
     
@@ -35,10 +36,10 @@ const Updatedashboard = ({dashboardData, onSubmit, closeModal}) => {
     return <>
         <form className='update-form-container'>
         <div className="group-label shadow">
-                <label className='p-color'>Current Balance:</label>
-                <h3 style={{color:'var(--PFM-primary)'}}> 
+                <h3> 
                      {currency_formater.format(state.availableBalance)}
                 </h3>
+                <p className='p-color'>Current Balance:</p>
             </div>
             <div className="group">
                 <label className='p-color'>Total Savings: <p className='header-color'>Update or leave as it is.</p> </label>
@@ -55,11 +56,11 @@ const Updatedashboard = ({dashboardData, onSubmit, closeModal}) => {
         </form>
         <div className='modal-bottom-action'>
                 <div className='modal-action-group'>
-                    <button className='btn btn-light mr-1' onClick={cancelModel}>Cancel</button>
-                    <button className='btn btn-primary' onClick={handleSubmit }>Update</button>
+                    <button className='btn btn-light mr-1 shadow' onClick={cancelModel}>Cancel</button>
+                    <button className='btn btn-primary shadow' onClick={handleSubmit }>Update</button>
                 </div>
         </div>
     </>
 }
 
-export default Updatedashboard
+export default UpdateDashboard

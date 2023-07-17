@@ -7,6 +7,7 @@
   --PFM-backdrop-bg-shadow: #e1ecc87d;
   --PFM-light-yellow-color: #ffc85c;
   --PFM-light-orange-color: #ac4425;
+  --PFM-pink-color: #ff508e;
   --orange: 0, 100, 0;
   --orange-light: rgba(var(--orange), 4);
 }
@@ -127,7 +128,7 @@ body ul {
   -webkit-appearance: none;
   font-family: sans-serif;
   cursor: pointer;
-  padding: 12px;
+  padding: 8px;
   min-width: 100px;
   border: 0px;
   -webkit-transition: background-color 100ms linear;
@@ -254,6 +255,16 @@ input[type="password"] {
 }
 .ml-3 {
   margin-left: 24px;
+}
+
+.active-link {
+  /* color: var(--PFM-light-orange-color) !important; */
+  color: var(--PFM-primary) !important;
+  background-color: var(--PFM-main-bg-color);
+  border-radius: 10px;
+}
+.active-link:hover {
+  color: var(--PFM-font-color) !important;
 }
 
 /*
