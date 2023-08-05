@@ -12,6 +12,10 @@
   flex-wrap: wrap;
 }
 
+.left {
+  padding: 0px !important;
+}
+
 .main-list .head-title .left h1 {
   font-size: 36px;
   font-weight: 600;

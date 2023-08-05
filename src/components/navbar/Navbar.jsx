@@ -52,7 +52,7 @@ const Navbar = () => {
                 <li onClick={changeTheme } > <i className="bi bi-moon"></i></li>
             </ul>
             <div className='mobile-menu' onClick={()=> setOpen(!open)}>
-            {open ? <i className="bi bi-x-lg"></i> : <i className="bi bi-list"></i> } 
+            {open ? <i className="bi bi-x-lg nav-menu-icon"></i> : <i className="bi bi-list nav-menu-icon"></i> } 
             </div>
         </nav>        
         </header>

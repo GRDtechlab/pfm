@@ -7,6 +7,24 @@
   padding: 12px;
   background-color: var(--PFM-main-bg-color);
   border-radius: 12px;
+  margin: 0.5em;
+}
+.group-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.group-type p {
+  flex: 1;
+  flex-basis: 25%;
+}
+.group-type .radio-group {
+  flex: 1;
+  display: flex;
+}
+.group-type .radio-group .item {
+  display: flex;
 }
 
 @media (max-width: 425px) {

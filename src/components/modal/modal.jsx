@@ -3,19 +3,17 @@
 import './modal.css';
 
 const Modal = ({...props }) => {
+    let Confirm = props?.content;
     return <>
-    
         <div className={ props.open ? ['modal-container','show-modal',' container'].join(' ') : ['hide-modal'].join(' ')}>
             <div className='modal-item'>
-                <i className="bi bi-x-lg modal-close" onClick={()=> props.setOpen((prevState)=> ({data:props.defaultRecord,open:false}))}></i>
+                <i className="bi bi-x-lg modal-close" onClick={()=> props.onCancel()}></i>
                 <div className='modal-title'>
                    <h3 className='header-color'> {props.title} </h3>
                 </div>
                 <div className='modal-content'>
                     <div className='content'>
-                        {
-                            props.content
-                        }
+                        { typeof Confirm === 'function' &&  <Confirm closeModal={props.onCancel} record={props.dashboardData}  />}
                     </div>
                 </div>
                 

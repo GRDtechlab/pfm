@@ -1,10 +1,10 @@
-.main-list {
+.main-transaction {
   width: 100%;
   /* padding: 36px 24px;
         font-family: var(--lato);
         height: 100vh; */
 }
-.main-list .head-title {
+.main-transaction .head-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,13 +12,17 @@
   flex-wrap: wrap;
 }
 
-.main-list .head-title .left h1 {
-  font-size: 36px;
-  font-weight: 600;
-  margin-bottom: 10px;
+.left {
+  padding: 0px !important;
 }
 
-.main-list .head-title .btn-download {
+.main-transaction .head-title .left h1 {
+  font-size: 36px;
+  font-weight: 600;
+  /* margin-bottom: 10px; */
+}
+
+.main-transaction .head-title .btn-download {
   height: 36px;
   padding: 0 16px;
   border-radius: 36px;
@@ -28,4 +32,86 @@
   align-items: center;
   grid-gap: 10px;
   font-weight: 500;
+}
+
+.transaction-list-container {
+  /* background-color: var(--PFM-secondary); */
+  width: 100%;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+  overflow-x: auto;
+  padding: 16px;
+  border-radius: 10px;
+}
+.transaction-list-container .head {
+  display: flex;
+  align-items: center;
+  grid-gap: 16px;
+  margin-bottom: 24px;
+}
+
+.transaction-list-container .head .search {
+  display: none;
+  margin-left: auto;
+}
+.transaction-list-container .head .search input {
+  padding: 3px 10px 3px 10px !important;
+}
+.show-search {
+  display: block !important;
+}
+.hide-search {
+  display: none !important;
+}
+.transaction-list-container .head h3 {
+  margin-left: auto;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.transaction-list-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.transaction-list-container table th {
+  padding-bottom: 12px;
+  font-size: 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--PFM-secondary);
+}
+
+.transaction-list-container table tbody tr:hover {
+  background-color: var(--PFM-secondary);
+}
+
+.transaction-list-container table td:first-child {
+  display: flex;
+  align-items: center;
+  grid-gap: 12px;
+  padding-left: 4px;
+}
+.transaction-list-container table td {
+  padding: 16px 0px;
+}
+
+@media screen and (max-width: 1024px) {
+  .main-transaction .head-title {
+    margin-left: 1.5em;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .transaction-list-container .head h3 {
+    font-size: 16px;
+    margin-left: 8px;
+  }
+  .transaction-list-container table th {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .transaction-list-container {
+    padding: 0px;
+  }
 }

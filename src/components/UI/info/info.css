@@ -1,0 +1,6 @@
+.modal-bottom-action-info {
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1em;
+}

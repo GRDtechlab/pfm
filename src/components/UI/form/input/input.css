@@ -13,6 +13,12 @@
   box-shadow: var(--PFM-header-color) 0px 0px 0px 3px;
   border-color: rgb(255, 255, 255);
 }
+.input-with-icon.error {
+  border: 1px solid var(--PFM-light-orange-color) !important;
+}
+.c-p {
+  cursor: pointer;
+}
 .bi {
   padding-left: 0.5rem;
   padding-right: 0.5rem;

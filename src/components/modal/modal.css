@@ -60,6 +60,9 @@
   overflow-y: scroll;
   padding: 1rem;
 }
+.modal-bottom-action {
+  /* position: absolute !important; */
+}
 
 @media screen and (max-width: 1024px) {
   .modal-container {

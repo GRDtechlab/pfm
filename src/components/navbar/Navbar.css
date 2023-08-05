@@ -65,7 +65,7 @@
     cursor: pointer;
     z-index: 10;
   }
-  .bi:hover {
+  .nav-menu-icon:hover {
     color: var(--PFM-primary);
     background-color: var(--PFM-main-bg-color);
     border-radius: 5px;

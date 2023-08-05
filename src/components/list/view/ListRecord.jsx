@@ -1,44 +1,47 @@
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
 import '../list.css';
 import AddRecords from '../add/AddRecords';
-import Modal from '../../modal/modal';
+import Modal from '../../modal/Modal';
 import UpdateList from '../update/UpdateList';
 import ConfirmModal from '../../modal/confirm/ConfirmModal';
 import DeleteList from '../delete/DeleteList';
+import useConfirm from '../../modal/confirm/ConfirmProvider';
 
 const ListRecord = ({data}) => {
-    const defaultRecord = {bank: {name:'',account_no:'', ifsc_code:'' ,pan_no:''}};
-    const [showAddModal,setShowAddModal] = useState({open:false, data:defaultRecord});
-    const [showUpdateModal,setShowUpdateModal] = useState({open:false,data:defaultRecord});
-    const [showDeleteModal,setShowDeleteModal] = useState({open:false,data:{}});
+    const confirm = useConfirm();
+
+    const onDelete = async (currentRecord) => {
+        let isConfirm = await confirm({title:'Delete', content:DeleteList, component: ConfirmModal, dashboardData:currentRecord })
+        console.log('delete confirm ', isConfirm)
+    }
+
+    const onEdit = async (currentRecord) =>{
+        let isConfirm = await confirm({title:'defaultRecordEdit', content:UpdateList, component: Modal, dashboardData: currentRecord})
+    }
+
+    const onAdd = async () => {
+        let isConfirm = await confirm({title:'Add New Record', content: AddRecords, component:Modal})
+    }
 
      if(data && data.length === 0){
         return <div> 
                 <h1 className='ml-3'>No List Records data found. </h1>
-                <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+                <button className="btn btn-primary" onClick={onAdd}>
                     <span className="button-icon"><i className='bi bi-plus' style={{fontSize:'1rem'}}> </i> Add Records</span>
                 </button>
-                {console.log({data},' list-cmp')}
-                <Modal  open={showAddModal.open} defaultRecord={defaultRecord} setOpen={setShowAddModal} title='Add New Record' content = {<AddRecords  record={showAddModal.data} closeModal={setShowAddModal} />}  />
         </div>
     }
     
     return (data && data.length !== 0) && <>
         
         <div className='main-list'>
-
-        <Modal  open={showUpdateModal.open} defaultRecord={defaultRecord} setOpen={setShowUpdateModal} title='Update List'  content = {<UpdateList record={showUpdateModal.data} closeModal={setShowUpdateModal} />} />
-
-        <ConfirmModal open={showDeleteModal.open} defaultRecord={{}} setOpen={setShowDeleteModal} title='Delete' content={<DeleteList record={showDeleteModal.data} closeModal={setShowDeleteModal} />} />
-
             <div className="head-title">
                 <div className="left">
                     <h1 className='header-color'>List</h1>
                 </div>
-                <button className="btn btn-primary" onClick={() => setShowAddModal({open:true})}>
+                <button className="btn btn-primary" onClick={onAdd}>
                     <span className="button-icon"><i className='bi bi-plus' style={{fontSize:'1rem'}}> </i> Add Records</span>
                 </button>
-                <Modal  open={showAddModal.open} defaultRecord={defaultRecord} setOpen={setShowAddModal}  title='Add New Record' content = {<AddRecords record={showAddModal.data}  closeModal={setShowAddModal} />}  />
             </div>
             
             <ul className="list">
@@ -67,9 +70,8 @@ const ListRecord = ({data}) => {
                                 <span className='text'>
                                     <h5 className='p-color'> Action </h5>
                                     <div className='list-action'>
-                                        
-                                        <i className="bi bi-pencil" onClick={()=>setShowUpdateModal( (prevState)=> ({open:true,data:currentRecord}))}></i>
-                                        <i className="bi bi-trash-fill color-danger" onClick={()=> setShowDeleteModal((prevState) => ({open:true,data:currentRecord}))}></i>
+                                        <i className="bi bi-pencil" onClick={()=>onEdit(currentRecord)}></i>
+                                        <i className="bi bi-trash-fill color-danger" onClick={ () => onDelete(currentRecord)}></i>
                                     </div>
                                 </span>
                             </div>
@@ -81,7 +83,6 @@ const ListRecord = ({data}) => {
             </ul>
         </div>
     </>
-
 }
 
 export default ListRecord;

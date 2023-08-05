@@ -1,21 +1,16 @@
+/* eslint-disable react/prop-types */
 import '../../dashboard/dashboard.css';
-
-import { useState } from "react";
-
+import {  useDashboardDataQuery } from "../../../services/pfm-api";
 import Modal from "../../modal/modal";
-import { useDashboardDataQuery, useNewDashboardDataMutation, useUpdateDashboardDataMutation } from "../../../services/pfm-api";
 import AddDashboard from "../add/AddDashboard";
 import UpdateDashboard from '../update/UpdateDashboard';
 
 import currency_formater from "../../../Utils/currency-formatter";
+import Info from '../../UI/info/Info';
+import useConfirm from '../../modal/confirm/ConfirmProvider';
 
 const DashboardList = ({data}) =>{
-    const defaultRecord = {availableBalance:0,total_savings:0,limit_pm:0,salary_pm:0};
-    const [showModal,setShowModal] = useState({open:false,data:defaultRecord});
-    
-    const [dashboardUpdate] = useUpdateDashboardDataMutation();
-    const [dashboardAdd] = useNewDashboardDataMutation();
-    
+    const confirm = useConfirm();
     const {dashboardData} = useDashboardDataQuery({user_id:'64a92ec2c0b4c1328f8089b7'}, {
         // At present this is not required but for reference I added this selectFromResult...
         // Here selectFromResult is used to find out alredy availale data from api. In our case we called data from Main.jsx,
@@ -36,29 +31,25 @@ const DashboardList = ({data}) =>{
     const currentMonth = month[new Date().getMonth() - 1];
     const currentYear = new Date().getFullYear();
 
-    
-    const onSubmit = async (dashboardUpdateData) =>{
-        console.log('handle submit called ', dashboardUpdateData)
-        await dashboardUpdate(dashboardUpdateData)
-}
-
-    const addNewDashboardData = async (addDashboardRecord) =>{
-        const finalAddDashboardRecord = { availableBalance:addDashboardRecord.salary_pm - addDashboardRecord.limit_pm, user_id:'64a92ec2c0b4c1328f8089b7',  ...addDashboardRecord }
-        console.log({finalAddDashboardRecord})
-        await dashboardAdd(finalAddDashboardRecord)
+    const onAdd = async () => {
+        const isConfirm = confirm({title: 'Add New Record', component: Modal, content: AddDashboard})
     }
 
+    const onEdit = async () => {
+        const isConfirm = confirm({title:'Update', component:Modal, content: UpdateDashboard, dashboardData:dashboardData})
+    }
+    
     if(data && data.length === 0){
         return <div>
-                      <h1 className='ml-3'>No Dashboard data found.</h1>
-                      <button className='btn btn-primary' onClick={()=>{setShowModal({open:true})}}>Add New Record</button>
-                      
-                      <Modal  open={showModal.open} defaultRecord={defaultRecord} setOpen={setShowModal} title='Add New Record' content = {<AddDashboard record={showModal.data} onSubmit= {addNewDashboardData} closeModal={setShowModal} />}  />     
-                     </div>
+                    <Info title={'No Dashboard data found'} desctiption={'Add Record First'}>
+                        <button className='btn btn-primary' onClick={onAdd}>Add New Record</button>
+                    </Info>
+                </div>
     }
 
     return (data && data.length !== 0) && <>
     <div className='main-dashboard'>
+        {console.log({data}, ' dashboard')}
         <div className="head-title">
             <div className="left">
                 <h1 className='header-color'>Dashboard </h1>
@@ -69,13 +60,18 @@ const DashboardList = ({data}) =>{
             </a>
         </div>
         <div className='action-header'>
-        <h3 className='header-color'> {currentMonth} {currentYear} </h3>
-        
-            <i className='bi bi-pencil add' onClick={()=>{setShowModal({open:true, data:data[0]})}}></i>
-            <Modal  open={showModal.open} defaultRecord={defaultRecord} setOpen={setShowModal} title='Update' content = {<UpdateDashboard dashboardData={showModal.data} onSubmit={onSubmit} closeModal={setShowModal} />} />            
+            <h3 className='header-color'> {currentMonth} {currentYear} </h3>
+            <i className='bi bi-pencil add' onClick={onEdit}></i>
         </div>
         <p className='p-color'>Last Updated At:  </p>
         <ul className="box-info">
+            <li className='shadow grandtotal'>
+                <i className="bx bi bi-currency-rupee"></i>
+            <span className="text">
+                <h3>{currency_formater.format(dashboardData.grand_total)}</h3>
+                <p className='color-black'>Grand Total</p>
+            </span>
+            </li>
             <li>
             <i className="bx bi bi-piggy-bank-fill"></i>
             <span className="text">
@@ -86,18 +82,11 @@ const DashboardList = ({data}) =>{
             <li>
             <i className="bx bi bi-bar-chart-line-fill light-orage-color"></i>
             <span className="text">
-                 <h3>{currency_formater.format(dashboardData.limit_pm)}</h3> {/* <i className="bi bi-currency-rupee"></i> */}
+                 <h3>{currency_formater.format(dashboardData.limit_pm)}</h3>
                 <p className='p-color'>Limit p<span className='seperator'>/</span>m to be saved</p>
             </span> 
-            {/* Per month limit to save */}
             </li>
-            <li>
-            <i className="bx bi bi-calendar2-fill light-green-color  "></i>
-            <span className="text">
-                <h3> {currency_formater.format(dashboardData.salary_pm)}</h3>
-                <p className='p-color'>Salary p<span className='seperator'>/</span>m</p>
-            </span>
-            </li>
+            
             <li>
             <i className="bx bi bi-wallet-fill light-yellow-color "></i>
             <span className="text">
@@ -106,7 +95,24 @@ const DashboardList = ({data}) =>{
             </span>
             </li>
         </ul>
-
+        <hr style={{marginTop:'1em'}}/>
+        <h2 className='header-color'>Incomes</h2>
+        <ul className="box-info">
+        <li>
+            <i className="bx bi bi-calendar2-fill light-green-color  "></i>
+            <span className="text">
+                <h3> {currency_formater.format(dashboardData.salary_pm)}</h3>
+                <p className='p-color'>Salary p<span className='seperator'>/</span>m</p>
+            </span>
+        </li>
+        <li>
+            <i className="bx bi bi-calendar2-fill light-green-color  "></i>
+            <span className="text">
+                <h3> {currency_formater.format(dashboardData.salary_pm)}</h3>
+                <p className='p-color'>Other Sources of Income p<span className='seperator'>/</span>m</p>
+            </span>
+            </li>
+        </ul>
     </div>
     </>
 }

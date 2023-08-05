@@ -1,6 +1,8 @@
 :root {
   --PFM-primary: #609966;
+  --PFM-primary-dark: rgb(0, 104, 74);
   --PFM-secondary: #c4d7b2;
+  --PFM-tag-color: #86e590;
   --PFM-font-color: #212529;
   --PFM-main-bg-color: #e1ecc8;
   --PFM-header-color: #40513b;
@@ -14,10 +16,10 @@
 [data-theme="dark"] {
   --PFM-main-bg-color: #212529;
   /* --PFM-primary: #212229; */
+  --PFM-primary-dark: #609966;
   --PFM-secondary: #282c34;
   --PFM-header-color: #b6bdca;
   --PFM-font-color: #f7ffe5;
-
   --base00: #282c34;
   --base01: #353b45;
   --base02: #3e4451;
@@ -136,6 +138,10 @@ body ul {
   transition: background-color 100ms linear;
 }
 
+.btn:disabled {
+  cursor: not-allowed;
+}
+
 .btn:focus,
 .btn.focus {
   outline: 0;
@@ -190,17 +196,25 @@ body ul {
 .color-primary {
   color: var(--PFM-primary);
 }
+.color-primary-dark {
+  color: var(--PFM-primary-dark);
+}
 .color-danger {
   color: var(--PFM-light-orange-color);
 }
+.color-black {
+  color: #000;
+}
+
 .shadow {
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
+
 /*
     COmmon form css..
 */
 
-input,
+input[type="text"],
 textarea {
   font-size: 18px;
   padding: 10px 10px 10px 8px;
@@ -210,20 +224,23 @@ textarea {
   border-radius: 10px;
   border: 1px solid transparent;
 }
-input {
+input[type="text"] {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
-input:hover {
+input.error {
+  border: 2px solid var(--PFM-light-orange-color) !important;
+}
+input[type="text"]:hover {
   border: 1px solid transparent;
 }
-input:focus,
+input[type="text"]:focus,
 textarea:focus {
   outline: none;
   border: 1px solid transparent;
 }
-input:focus ~ label,
-input:valid ~ label,
+input[type="text"]:focus ~ label,
+input[type="text"]:valid ~ label,
 textarea:focus ~ label,
 textarea:valid ~ label {
   top: -5px;
@@ -231,13 +248,26 @@ textarea:valid ~ label {
   color: #000;
   left: 11px;
 }
-input:focus ~ .bar:before,
+input[type="text"]:focus ~ .bar:before,
 textarea:focus ~ .bar:before {
   width: 320px;
 }
 
 input[type="password"] {
   letter-spacing: 0.3em;
+}
+
+input[type="radio"] {
+  accent-color: var(--PFM-primary);
+  -ms-transform: scale(1.8); /* IE 9 */
+  -webkit-transform: scale(1.8); /* Chrome, Safari, Opera */
+  transform: scale(1.8);
+  cursor: pointer;
+}
+
+th,
+td {
+  display: table-cell !important;
 }
 
 /*
@@ -256,10 +286,27 @@ input[type="password"] {
 .ml-3 {
   margin-left: 24px;
 }
+.mt-1 {
+  margin-top: 8px;
+}
+
+.o-1 {
+  opacity: 0.25px;
+}
+.o-2 {
+  opacity: 0.5px;
+}
+
+.flex-d {
+  display: flex;
+}
+.flex-1 {
+  flex: 1;
+}
 
 .active-link {
   /* color: var(--PFM-light-orange-color) !important; */
-  color: var(--PFM-primary) !important;
+  color: var(--PFM-primary-dark) !important;
   background-color: var(--PFM-main-bg-color);
   border-radius: 10px;
 }
@@ -267,13 +314,84 @@ input[type="password"] {
   color: var(--PFM-font-color) !important;
 }
 
+.add {
+  padding: 0.5rem;
+  font-weight: bolder;
+  cursor: pointer;
+  /* font-size: 2.3rem; */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add:hover {
+  color: var(--PFM-primary);
+  background-color: var(--PFM-secondary);
+}
+
+.info {
+  width: calc(100% - 20px);
+  padding: 1rem;
+  background-color: var(--PFM-secondary);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-left: 10px solid var(--PFM-primary);
+}
+.info .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info .bi {
+  font-size: 2rem;
+  margin-right: 0.3em;
+}
+
+.debit {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: var(--PFM-light-yellow-color);
+  color: #000;
+  border-radius: 10px;
+}
+.debit::before {
+  content: "-";
+  margin-right: 0.2em;
+}
+.credit {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: var(--PFM-tag-color);
+  color: #000;
+  border-radius: 10px;
+}
+
+.credit::before {
+  content: "+";
+  margin-right: 0.2em;
+}
+
 /*
     Modal css...
 */
-
+.modal-bottom-action-info {
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
 .modal-bottom-action {
-  position: sticky;
-  bottom: 0;
+  /* position: sticky; */
+  /* bottom: 0; */
+  position: absolute !important;
+  bottom: 60px;
+  right: 0px;
   border-top: 1px solid var(--PFM-main-bg-color);
   display: flex;
   justify-content: flex-end;
