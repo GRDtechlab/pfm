@@ -56,23 +56,23 @@ const ListRecord = ({data}) => {
                         <li key={index}>
                             
                             <div className='list-inner-container'>
-                                <span className='text'>
+                                <span className='list-item'>
                                     <h5 className='p-color'> Bank Name </h5>
                                     {currentRecord.bank.name}
                                 </span>
-                                <span className='text'>
+                                <span className='list-item'>
                                     <h5 className='p-color'> Bank Account </h5>
                                     {currentRecord.bank.account_no}
                                 </span>
-                                <span className='text'>
+                                <span className='list-item'>
                                     <h5 className='p-color'> IFSC </h5>
                                       {currentRecord.bank.ifsc_code} 
                                 </span>
-                                <span className='text'>
+                                <span className='list-item'>
                                     <h5 className='p-color'> Pan No </h5>
                                     {currentRecord.bank.pan_no}
                                 </span>
-                                <span className='text'>
+                                <span className='list-item'>
                                     <h5 className='p-color'> Action </h5>
                                     <div className='list-action'>
                                         <i className="bi bi-pencil" onClick={()=>onEdit(currentRecord)}></i>
@@ -86,7 +86,7 @@ const ListRecord = ({data}) => {
                 } )  
             }
             </ul>
-        </div>
+ 0       </div>
     </>
 }
 
