@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import '../list.css';
 import AddRecords from '../add/AddRecords';
-import Modal from '../../modal/Modal';
+// import Modal from '../../modal/Modal';
 import UpdateList from '../update/UpdateList';
 import ConfirmModal from '../../modal/confirm/ConfirmModal';
 import DeleteList from '../delete/DeleteList';
 import useConfirm from '../../modal/confirm/ConfirmProvider';
 import Info from '../../UI/info/Info';
+import Modal from '../../modal/modal';
 
 const ListRecord = ({data}) => {
     const confirm = useConfirm();
@@ -24,7 +25,7 @@ const ListRecord = ({data}) => {
         let isConfirm = await confirm({title:'Add New Record', content: AddRecords, component:Modal})
     }
 
-     if(data && data.length === 0){
+    if(data && data.length === 0){
         return <div> 
                     <Info title={'No List Records data found.'} desctiption={'Add List Record First'}>
                         <button className='btn btn-primary' onClick={onAdd}>Add New Record</button>
