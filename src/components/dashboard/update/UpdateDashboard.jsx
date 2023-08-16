@@ -155,7 +155,7 @@ const UpdateDashboard = ({record:dashboardData, closeModal}) => {
                 { eachFieldType.type !== '' &&   
                     <label className='flex-d' style={{marginTop:'0.5em'}} >
                         { getValues().radio[index]['updatedValue'] >= 0 &&
-                          <span className='flex-1' style={{flexBasis:'50%'}}>Value after: <span className={eachFieldType.type === 'credit' ? 'credit' : 'debit'}> {eachFieldType.type} </span> </span> 
+                          <span className='flex-1' style={{flexBasis:'50%'}}> Value: <span className={eachFieldType.type === 'credit' ? 'credit' : 'debit'}> {eachFieldType.type} </span> </span> 
                         }
                         <h3 style={{flexBasis:'50%', textAlign:'right'}} className='flex-1 color-primary-dark'> { currency_formater.format (eachFieldType.updatedValue)} </h3>
                     </label>

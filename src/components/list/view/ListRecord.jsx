@@ -86,7 +86,7 @@ const ListRecord = ({data}) => {
                 } )  
             }
             </ul>
- 0       </div>
+        </div>
     </>
 }
 
