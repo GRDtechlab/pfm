@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import './Modal.css';
+import './modal.css';
 
 const Modal = ({...props }) => {
     let Confirm = props?.content;
