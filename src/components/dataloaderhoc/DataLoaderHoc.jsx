@@ -25,7 +25,7 @@ const DataLoaderHoc = WrapedComponent => props => {
     if(isLoading){
         return <h1 className='ml-3'>Data is fetching... </h1>
     }
-
+    
     return <WrapedComponent {...props} />
 }
 export default DataLoaderHoc;

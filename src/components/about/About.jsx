@@ -3,21 +3,20 @@ import {useOutletContext} from 'react-router-dom';
 import about from '../../assets/about.svg';
 import { useEffect } from 'react';
 
-
 const About = () =>{
-    const { someData:hideSidebar, mainRef:mainElementRef } = useOutletContext();
+    // const { someData:hideSidebar, mainRef:mainElementRef } = useOutletContext();
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        hideSidebar(true);
-        mainElementRef.current.classList.add('hide-sidebar');
-        mainElementRef.current.getElementsByClassName('menu-with-main')[0].classList.add('show-icon-menu')
-        return () => {
-            hideSidebar(false);
-            mainElementRef.current.classList.remove('hide-sidebar');
-            mainElementRef.current.getElementsByClassName('menu-with-main')[0].classList.remove('show-icon-menu')
-        }
-    },[])
+    //     hideSidebar(true);
+    //     mainElementRef.current.classList.add('hide-sidebar');
+    //     mainElementRef.current.getElementsByClassName('menu-with-main')[0].classList.add('show-icon-menu')
+    //     return () => {
+    //         hideSidebar(false);
+    //         mainElementRef.current.classList.remove('hide-sidebar');
+    //         mainElementRef.current.getElementsByClassName('menu-with-main')[0].classList.remove('show-icon-menu')
+    //     }
+    // },[])
 
     return <>
         <section>

@@ -1,0 +1,37 @@
+.hide-sidebar {
+  margin-left: 0px !important;
+  width: 100% !important;
+}
+.show-sidebar {
+  margin-left: 250px !important;
+  width: calc(100% - 250px) !important;
+}
+
+.show-icon-menu {
+  display: none !important;
+}
+
+section {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: calc(100vh - 140px);
+  gap: 8px;
+}
+
+section form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  margin-top: 1em;
+}
+.group {
+  margin-top: 0.5em;
+}
+
+@media only screen and (max-width: 768px) {
+  .hide {
+    display: none !important;
+  }
+}

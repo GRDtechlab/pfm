@@ -1,16 +1,33 @@
 import './Navbar.css'
 
 import { useEffect, useState } from 'react'
-import {Link, NavLink} from 'react-router-dom';
+import {Link, NavLink, useNavigate} from 'react-router-dom';
 import logo from '../../assets/logo.jpg'
+import { useLogoutMutation } from '../../services/pfm-api';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../services/auth-slice';
 
-const Navbar = () => {
+const Navbar = ({...props}) => {
+    const {user} = props;
     const [open,setOpen] = useState(false);
+    const navigate= useNavigate();
+    const [onLoggedOut] = useLogoutMutation();
+    const dispatch = useDispatch();
     const [currentTheme,setCurrentTheme] = useState(localStorage.getItem('current-theme'));
 
     useEffect(() => {
         changeTheme()
     }, [])
+
+    const onLogout= async()=>{
+        try{
+            const data = await onLoggedOut(user).unwrap();
+            dispatch(logOut())
+            navigate('/public/login');
+        }catch(catchError){
+            console.log(catchError)
+        }
+    }
 
     const changeTheme = () =>{
         
@@ -45,7 +62,9 @@ const Navbar = () => {
                     </NavLink>
                 
                 <li><a>Contact</a></li>
-                <li><a>Login </a></li>
+                <a onClick={onLogout}>
+                    <li>Logout</li>
+                </a>
                 <li className='disabled'>
                     <div className='navmenu-seperator'></div>
                 </li>

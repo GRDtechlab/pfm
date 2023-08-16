@@ -2,7 +2,8 @@
 import { NavLink } from 'react-router-dom'
 import './sidebar.css'
 
-const Sidebar = (props) =>{    
+const Sidebar = (props) =>{
+    const {currentUser:user} = props;    
     return (
         <>
                 <div className= { props.open ? ['sidebar shadow','sidebar-show',' container'].join(' ') : ['sidebar shadow','container'].join(' ')}>
@@ -10,9 +11,9 @@ const Sidebar = (props) =>{
                         {props.open && <i className="bi bi-x-lg sidebar-close" onClick={()=> props.setOpen(false)}></i> }
                         <i className="bi bi-person-fill"></i>
                         <div className="profile-name">
-                        <h4>Gaurang Dhorda</h4>
-                        <p className='p-color'>Software Developer</p>
-                        <p className='email p-color'>grdtechlab@gmail.com</p>
+                        <h4>{user?.firstname} {user?.lastname}</h4>
+                        <p className='p-color'>{user?.occupation}</p>
+                        <p className='email p-color'>{user?.email}</p>
                         </div>
                     </div>
                     <div className="menu">

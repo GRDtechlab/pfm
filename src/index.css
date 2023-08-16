@@ -2,10 +2,14 @@
   --PFM-primary: #609966;
   --PFM-primary-dark: rgb(0, 104, 74);
   --PFM-secondary: #c4d7b2;
+  --PFM-bg-primary-color: #609966c9;
+  --PFM-card-bg-color: #aeddae;
   --PFM-tag-color: #86e590;
   --PFM-font-color: #212529;
   --PFM-main-bg-color: #e1ecc8;
+  --PFM-main-bg-color-light: #fbfff1;
   --PFM-header-color: #40513b;
+  --PFM-header-color-dark: #001e2b;
   --PFM-backdrop-bg-shadow: #e1ecc87d;
   --PFM-light-yellow-color: #ffc85c;
   --PFM-light-orange-color: #ac4425;
@@ -14,11 +18,17 @@
   --orange-light: rgba(var(--orange), 4);
 }
 [data-theme="dark"] {
-  --PFM-main-bg-color: #212529;
+  /* --PFM-main-bg-color: #212529; --PFM-secondary: #282c34; OLD Dark mode theme color  */
+  --PFM-main-bg-color: #02182f;
+  --PFM-secondary: #19243b;
+
+  --PFM-main-bg-color-light: #212529;
   /* --PFM-primary: #212229; */
   --PFM-primary-dark: #609966;
-  --PFM-secondary: #282c34;
+  --PFM-bg-primary-color: "#609966c9";
+  --PFM-card-bg-color: "#aeddae";
   --PFM-header-color: #b6bdca;
+  --PFM-header-color-dark: #f7ffe5;
   --PFM-font-color: #f7ffe5;
   --base00: #282c34;
   --base01: #353b45;
@@ -37,7 +47,8 @@
 body {
   font-size: 1rem;
   line-height: 1.3;
-  font-family: "Poppins", "sans-sarif";
+  font-family: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  /* font-family: "Poppins", "sans-sarif"; */
   background-color: var(--PFM-main-bg-color);
   color: var(--PFM-font-color);
 
@@ -120,6 +131,12 @@ body ul {
 .p-color {
   color: var(--PFM-header-color) !important;
 }
+.card-bg-color {
+  background-color: var(--PFM-card-bg-color) !important;
+}
+.header-color-dark {
+  color: var(--PFM-header-color-dark) !important;
+}
 
 /*
     Common button css design...
@@ -162,6 +179,23 @@ body ul {
   background: var(--PFM-primary);
   color: #ffffff;
   border-radius: 10px;
+}
+
+.btn-large {
+  font-weight: bold;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 24px;
+  font-size: 24px;
+  background-color: var(--PFM-primary-dark);
+  color: white;
+  letter-spacing: 1px;
+  padding: 8px 40px !important;
+}
+.btn-large:hover {
+  background-color: var(--PFM-primary);
 }
 
 .btn-primary:hover {
@@ -215,6 +249,7 @@ body ul {
 */
 
 input[type="text"],
+input[type="password"],
 textarea {
   font-size: 18px;
   padding: 10px 10px 10px 8px;
@@ -224,7 +259,8 @@ textarea {
   border-radius: 10px;
   border: 1px solid transparent;
 }
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
@@ -288,6 +324,9 @@ td {
 }
 .mt-1 {
   margin-top: 8px;
+}
+.mt-2 {
+  margin-top: 16px;
 }
 
 .o-1 {
@@ -399,4 +438,7 @@ td {
 }
 .modal-action-group {
   margin: 0.5em;
+}
+.login-svg path {
+  fill: red !important;
 }

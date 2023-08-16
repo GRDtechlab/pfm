@@ -1,0 +1,11 @@
+.public-main {
+  display: flex;
+  width: 100% !important; /* Here 20% is sidebar width  */
+  /* width: calc( 100% - 20% - 25%); */ /* use this three % for showing two columns */
+  margin-left: 0px !important;
+  padding: 1rem;
+  min-height: 100%;
+  min-width: 300px;
+  height: max-content;
+  margin-bottom: 1em;
+}

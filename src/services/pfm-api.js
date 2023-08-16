@@ -2,8 +2,18 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const pfmApi = createApi({
   reducerPath: "pfmApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5001/api/pfm" }),
-  tagTypes: ["dashboard", "records", "transactions"],
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://pfm-api.vercel.app/api/pfm", // "http://localhost:5001/api/pfm",
+    credentials: "include",
+    prepareHeaders: (headers, { getState }) => {
+      // const token = getState().auth.token;
+      // if (token) {
+      //   headers.set("Authorization", `Bearer ${token}`);
+      // }
+      return headers;
+    },
+  }),
+  tagTypes: ["dashboard", "records", "transactions", "users"],
   endpoints: (builder) => ({
     dashboardData: builder.query({
       query: ({ user_id }) => ({ url: `/dashboard/${user_id}`, method: "GET" }), // This is /dashboard/userid
@@ -67,6 +77,49 @@ export const pfmApi = createApi({
       }),
       invalidatesTags: ["transactions", "dashboard"],
     }),
+    getUsersById: builder.query({
+      query: ({ user_id }) => ({
+        url: `/user/${user_id}`,
+        method: "GET",
+      }),
+      providesTags: ["users"],
+    }),
+    addNewUserRecord: builder.mutation({
+      query: (userData) => ({
+        url: "/user",
+        method: "POST",
+        body: { ...userData },
+      }),
+      invalidatesTags: ["users"],
+    }),
+    login: builder.mutation({
+      query: (loginData) => ({
+        url: "/user/login",
+        method: "POST",
+        body: loginData,
+      }),
+    }),
+    logout: builder.mutation({
+      query: (user) => ({
+        url: "/user/logout",
+        method: "POST",
+        body: { ...user },
+      }),
+    }),
+    isUserLoggedIn: builder.mutation({
+      query: (user) => ({
+        url: "/user/userloggedin",
+        method: "POST",
+        body: { user },
+      }),
+    }),
+    checkEmailIsAvailable: builder.mutation({
+      query: (email) => ({
+        url: `/user/checkEmailAvailability`,
+        method: "POST",
+        body: { email },
+      }),
+    }),
   }),
 });
 
@@ -80,4 +133,10 @@ export const {
   useDeleteRecordsMutation,
   useGetTransactionQuery,
   useAddTransactionMutation,
+  useGetUsersByIdQuery,
+  useAddNewUserRecordMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useIsUserLoggedInMutation,
+  useCheckEmailIsAvailableMutation,
 } = pfmApi;

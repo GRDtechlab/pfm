@@ -6,6 +6,7 @@ import UpdateList from '../update/UpdateList';
 import ConfirmModal from '../../modal/confirm/ConfirmModal';
 import DeleteList from '../delete/DeleteList';
 import useConfirm from '../../modal/confirm/ConfirmProvider';
+import Info from '../../UI/info/Info';
 
 const ListRecord = ({data}) => {
     const confirm = useConfirm();
@@ -25,10 +26,13 @@ const ListRecord = ({data}) => {
 
      if(data && data.length === 0){
         return <div> 
-                <h1 className='ml-3'>No List Records data found. </h1>
+                    <Info title={'No List Records data found.'} desctiption={'Add List Record First'}>
+                        <button className='btn btn-primary' onClick={onAdd}>Add New Record</button>
+                    </Info>
+                {/* <h1 className='ml-3'> </h1>
                 <button className="btn btn-primary" onClick={onAdd}>
                     <span className="button-icon"><i className='bi bi-plus' style={{fontSize:'1rem'}}> </i> Add Records</span>
-                </button>
+                </button> */}
         </div>
     }
     

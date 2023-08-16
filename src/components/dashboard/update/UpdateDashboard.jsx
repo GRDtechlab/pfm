@@ -80,13 +80,17 @@ const UpdateDashboard = ({record:dashboardData, closeModal}) => {
             formsValue = {...formsValue, [eachRowRadio['fieldType']] : eachRowRadio['updatedValue'] === 0 ? formsValue[eachRowRadio['fieldType']] :  eachRowRadio['updatedValue']}
         })
 
-        let salaryAfterTotalDebited = formsValue.salary_pm - formsValue.transactions.debited;
-        let salaryAfterTotalCredited = salaryAfterTotalDebited + formsValue.transactions.credited;
-        let availableBalance = salaryAfterTotalCredited - formsValue.limit_pm;
-        let grandTotal = availableBalance + +formsValue.limit_pm + +formsValue.total_savings;
-        
-        let finalUpdate = {...formsValue, availableBalance: availableBalance, grand_total:grandTotal  }
-            
+        console.log({formsValue})
+
+
+        // let salaryAfterTotalDebited = formsValue.salary_pm - formsValue.transactions.debited;
+        // let salaryAfterTotalCredited = salaryAfterTotalDebited + formsValue.transactions.credited;
+        // let availableBalance = salaryAfterTotalCredited - formsValue.limit_pm;
+        // let grandTotal = availableBalance + +formsValue.limit_pm + +formsValue.total_savings;
+        let grandTotal = +formsValue.availableBalance + +formsValue.limit_pm + +formsValue.total_savings;
+
+        let finalUpdate = {...formsValue,  grand_total:grandTotal  }
+        console.log({finalUpdate})    
         onUpdateTransaction(finalUpdate);
         closeModal({open:false, data:defaultRecord});
         
@@ -171,7 +175,7 @@ const UpdateDashboard = ({record:dashboardData, closeModal}) => {
                     <button className='btn btn-light mr-1 shadow' onClick={cancelModel}>Cancel</button>
                     <button className='btn btn-primary shadow' type='submit' disabled={isCustomError()} > Update  </button>
                 </div>
-        </div>
+            </div>
         </form>
     </>
 }

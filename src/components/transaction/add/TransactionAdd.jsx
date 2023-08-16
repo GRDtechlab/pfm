@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import {toast} from 'react-toastify';
 import Input from '../../UI/form/input/Input';
 import './transaction-add.css';
 import { useAddTransactionMutation, useDashboardDataQuery } from '../../../services/pfm-api';
@@ -9,15 +8,18 @@ import currency_formater from '../../../Utils/currency-formatter';
 import ConfirmModal from '../../modal/confirm/ConfirmModal';
 import Confirm from '../confirm/Confirm';
 import useConfirm from '../../modal/confirm/ConfirmProvider';
+import alertToast from '../../UI/toast/toastify-alert';
+import { useGetCurrentUser } from '../../../services/get-current-logged-in-user-hook';
 
 const TransactionAdd = ({record, closeModal}) =>{
     // let defaultRecord = {transaction_type:'',transaction_amount:'', transaction_description:''  }
+    const user = useGetCurrentUser();
     const [addTransaction] = useAddTransactionMutation();
     const {register, reset, handleSubmit, formState:{errors}} = useForm({mode: "onChange"});
     const [disableStatus, setDisableStatus] = useState(false);
     const confrim = useConfirm();
 
-    const {dashboardData} = useDashboardDataQuery({user_id:'64a92ec2c0b4c1328f8089b7'}, {
+    const {dashboardData} = useDashboardDataQuery({user_id:user._id}, {
         // At present this is not required but for reference I added this selectFromResult...
         // Here selectFromResult is used to find out alredy availale data from api. In our case we called data from Main.jsx,
         // then we used this data and add condition to check if its array of not then we need only object of that data.
@@ -37,10 +39,6 @@ const TransactionAdd = ({record, closeModal}) =>{
         console.log(errors)
     }
 
-    const notify = (messsage) => toast.error(messsage, {
-        position: toast.POSITION.TOP_CENTER
-      });
-
     const continueTransaction = async (record) => {
                 
         setDisableStatus(prevState => true); 
@@ -49,7 +47,7 @@ const TransactionAdd = ({record, closeModal}) =>{
         }catch(catchError){
             
             if(catchError.status === 400){
-                notify(catchError.data.error);
+                alertToast({type:'error',message:catchError.data.error});
             }
             
         }
@@ -60,7 +58,7 @@ const TransactionAdd = ({record, closeModal}) =>{
     const customHandleSubmit = async (formsValue) =>{
         console.log({formsValue});
         
-        const finalTransactionRecord = { user_id:'64a92ec2c0b4c1328f8089b7',  ...formsValue }          
+        const finalTransactionRecord = { user_id:user._id,  ...formsValue }          
         if(finalTransactionRecord.transaction_type === 'debit'){
             if( finalTransactionRecord.transaction_amount >= dashboardData.availableBalance ){
                     let result ={};
@@ -120,7 +118,7 @@ const TransactionAdd = ({record, closeModal}) =>{
                 <ul className='balance-container m-1'>
                 <li className='shadow'>
                         <label className='p-color'>Grand Total</label>
-                            <h3 className='color-primary'>{currency_formater.format(dashboardData.grand_total)}</h3>
+                            <h3 className='color-primary-dark'>{currency_formater.format(dashboardData.grand_total)}</h3>
                     </li>
                     <li className='shadow'>
                         <label className='p-color'>Current Balance</label>
@@ -172,15 +170,13 @@ const TransactionAdd = ({record, closeModal}) =>{
             <div className="group">
                 <label className='p-color'>Transaction Amount: </label>
                 <Input icon={<i className="bi bi-credit-card-fill"></i>} name={'transaction_amount'} className={errors?.transaction_amount ? 'error':''} required register={register} handleOnChange={updateAddTransactionForm} />
-                {errors?.transaction_amount?.type === 'validate' && <span className='light-orage-color'> {errors?.transaction_amount?.message}</span> }
-                {errors?.transaction_amount?.type === 'required' && <span className='light-orage-color'> {errors?.transaction_amount?.message}</span> }
+                <span className='light-orage-color'> {errors?.transaction_amount?.message}</span>
             </div>
             <div className="group">
                 <label className='p-color'>Transaction Description: </label>
                 <Input validateAs='text' icon={<i className="bi bi-credit-card-fill"></i>} name={'transaction_description'}
                  className={errors?.transaction_description ? 'error':''} required register={register} handleOnChange={updateAddTransactionForm} />
-                 {errors?.transaction_description?.type === 'validate' && <span className='light-orage-color'> {errors?.transaction_description?.message}</span> }
-                 {errors?.transaction_description?.type === 'required' && <span className='light-orage-color'> {errors?.transaction_description?.message}</span> }
+                 <span className='light-orage-color'> {errors?.transaction_description?.message}</span>
             </div>
             <div className='modal-bottom-action'>
                 <div className='modal-action-group'>

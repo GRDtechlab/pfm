@@ -9,9 +9,9 @@ import currency_formater from "../../../Utils/currency-formatter";
 import Info from '../../UI/info/Info';
 import useConfirm from '../../modal/confirm/ConfirmProvider';
 
-const DashboardList = ({data}) =>{
+const DashboardList = ({data, user}) =>{
     const confirm = useConfirm();
-    const {dashboardData} = useDashboardDataQuery({user_id:'64a92ec2c0b4c1328f8089b7'}, {
+    const {dashboardData} = useDashboardDataQuery({user_id:user._id}, {
         // At present this is not required but for reference I added this selectFromResult...
         // Here selectFromResult is used to find out alredy availale data from api. In our case we called data from Main.jsx,
         // then we used this data and add condition to check if its array of not then we need only object of that data.
@@ -52,7 +52,7 @@ const DashboardList = ({data}) =>{
         {console.log({data}, ' dashboard')}
         <div className="head-title">
             <div className="left">
-                <h1 className='header-color'>Dashboard </h1>
+                <h1 className='header-color-dark'>Dashboard </h1>
             </div>
                 <a href="#" className="btn btn-primary shadow">
                 <i className="bx bxs-cloud-download"></i>
@@ -63,7 +63,7 @@ const DashboardList = ({data}) =>{
             <h3 className='header-color'> {currentMonth} {currentYear} </h3>
             <i className='bi bi-pencil add' onClick={onEdit}></i>
         </div>
-        <p className='p-color'>Last Updated At:  </p>
+        <div className='p-color'  style={{display:'flex', gap:'8px'}} >Last Updated At: <h4 className='p-color'> {new Date(dashboardData.updatedAt).toLocaleDateString()} </h4> </div>
         <ul className="box-info">
             <li className='shadow grandtotal'>
                 <i className="bx bi bi-currency-rupee"></i>

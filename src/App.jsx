@@ -4,25 +4,30 @@ import './App.css';
 
 import { Suspense, lazy} from 'react';
 import {  RouterProvider, createBrowserRouter} from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 
 import MainLayout from "./components/main/MainLayout";
 import About from "./components/about/About";
 import { ConfirmDialogProvider } from "./components/modal/confirm/ConfirmProvider";
-
+import Signup from "./components/authentication/signup/Signup";
+import Login from "./components/authentication/login/Login";
+import PublicLayout from "./components/public/PublicLayout";
+import Landing from "./components/public/home/Landing";
 
 const Dashboard = lazy(() => import('./components/dashboard/Dashboard' /*webpackChunkName: "Dashboard-Lazy-Load"*/));
 const ListCmp = lazy(() => import('./components/list/ListCmp' /*webpackChunkName: "List-Lazy-Load"*/));
 const Transaction = lazy(() => import('./components/transaction/Transaction' /*webpackChunkName: "Transation-Lazy-Load"*/));
 const NotFound = lazy(() => import('./components/not-found/NotFound' /*webpackChunkName: "NotFound-Lazy-Load"*/ ))
+
 function App() {
 // 64a92ec2c0b4c1328f8089b7 -- USERID to be passed to check dashboard of the related user.
 const router = createBrowserRouter([
   {
     path:'/',
-    element:<MainLayout/>,
+    element: <MainLayout/>,
     children:[
       {
+        
         index:true,
         element:<Suspense fallback={<h1 className='ml-3'>Loading Dashboard...</h1>}>
                   { <Dashboard /> }
@@ -39,6 +44,31 @@ const router = createBrowserRouter([
         element: <Suspense fallback={<h1 className='ml-3'>Loading Transactions...</h1>}>
                   { <Transaction /> }
                 </Suspense>
+      },
+      
+    ]
+  },
+  {
+    path:'public',
+    element: <PublicLayout />,
+    children:[
+      {
+        path:'home',
+        element:<Suspense fallback={<h1 className="ml-3">Loading Home Page...</h1>}>
+                  {<Landing/>}
+                </Suspense>
+      },
+      {
+        path: 'login',
+        element:<Suspense fallback={<h1 className="ml-3">Loading Login...</h1>}>
+                  {<Login/>}
+              </Suspense>
+      },
+      {
+        path:'signup',
+        element:<Suspense fallback={<h1 className="ml-3">Loading Signup...</h1>}>
+          {<Signup/>}
+        </Suspense>
       },
       {
         path:'about',
