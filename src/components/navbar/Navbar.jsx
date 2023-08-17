@@ -32,7 +32,7 @@ const Navbar = ({...props}) => {
     const changeTheme = () =>{
         
         setCurrentTheme((currentTheme) => {
-            setOpen(prevValue =>  !prevValue)            
+            setOpen(prevValue =>  prevValue === true && false )            
             if(currentTheme === 'light'){
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('current-theme','dark')
