@@ -16,7 +16,7 @@ const Navbar = ({...props}) => {
     const [currentTheme,setCurrentTheme] = useState();
 
     useEffect(() => {
-        changeTheme()
+        addPreferenceThemeOnLoad()
     }, [])
 
     const onLogout= async()=>{
@@ -26,6 +26,14 @@ const Navbar = ({...props}) => {
             navigate('/public/login');
         }catch(catchError){
             console.log(catchError)
+        }
+    }
+    const addPreferenceThemeOnLoad =() =>{
+        let currentTheme = localStorage.getItem('current-theme');
+        if(currentTheme === 'light'){
+            document.documentElement.setAttribute('data-theme', 'light');
+        }else{
+            document.documentElement.setAttribute('data-theme', 'dark');
         }
     }
 
