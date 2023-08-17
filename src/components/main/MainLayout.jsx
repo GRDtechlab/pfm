@@ -51,7 +51,7 @@ const MainLayout = () => {
             </div>
             <Outlet context={{ someData: setIsHide, mainRef:mainElementRef, user:currentUser }}/>  {/* Outlet here all routes loads... */}
         </main>
-            <Footer/>
+            {/* <Footer/> */}
     </div>}       
                 
         </>

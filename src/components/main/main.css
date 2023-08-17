@@ -12,7 +12,7 @@
   margin-bottom: 1em;
 }
 .bi-list {
-  margin-right: 1em;
+  /* margin-right: 0.5em; */
   cursor: pointer;
 }
 .mobile-sidebar-menu-icon i {
