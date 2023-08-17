@@ -30,7 +30,7 @@ const Navbar = ({...props}) => {
     }
 
     const changeTheme = () =>{
-        
+        console.log('How many times changeTheme called...', currentTheme, localStorage.getItem('current-theme'))
         setCurrentTheme((currentTheme) => {
             currentTheme = localStorage.getItem('current-theme');
             setOpen(prevValue =>  prevValue === true && false )            
