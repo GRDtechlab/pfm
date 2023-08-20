@@ -10,19 +10,9 @@ const Transaction = () => {
     const { user } = useOutletContext();
     const [localError, setLocalError] = useState(null);
     const {data,error,isLoading} = useGetTransactionQuery({user_id:user._id});
-    const {dashboardData} = useDashboardDataQuery({user_id:user._id}, {
-        // At present this is not required but for reference I added this selectFromResult...
-        // Here selectFromResult is used to find out alredy availale data from api. In our case we called data from Main.jsx,
-        // then we used this data and add condition to check if its array of not then we need only object of that data.
-        selectFromResult:({data})=>{
-            if(!Array.isArray(data)){
-                data = [];
-            }
-                return {dashboardData:data.length}
-        }
-    })
-    
-   return <Hoc isLoading={isLoading} error={error} data={data} localError={{dashboardData}} setLocalError={setLocalError} user={user}  />
+    const dashboardData = useDashboardDataQuery({user_id:user._id}).data
+    console.log({dashboardData},user._id)
+   return <Hoc isLoading={isLoading} error={error} data={data} localError={{dashboardData:dashboardData?.length}} setLocalError={setLocalError} user={user}  />
 }
 
 export default Transaction

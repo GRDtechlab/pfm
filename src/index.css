@@ -389,6 +389,8 @@ td {
 }
 
 .debit {
+  display: block;
+  width: 100%;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 4px;
@@ -402,6 +404,8 @@ td {
   margin-right: 0.2em;
 }
 .credit {
+  display: block;
+  width: 100%;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 4px;
