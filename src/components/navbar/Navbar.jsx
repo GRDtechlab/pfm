@@ -13,7 +13,7 @@ const Navbar = ({...props}) => {
     const navigate= useNavigate();
     const [onLoggedOut] = useLogoutMutation();
     const dispatch = useDispatch();
-    const [currentTheme,setCurrentTheme] = useState();
+    const [currentTheme,setCurrentTheme] = useState(localStorage.getItem('current-theme'));
 
     useEffect(() => {
         addPreferenceThemeOnLoad()
@@ -29,7 +29,7 @@ const Navbar = ({...props}) => {
         }
     }
     const addPreferenceThemeOnLoad =() =>{
-        let currentTheme = localStorage.getItem('current-theme');
+        // let currentTheme = localStorage.getItem('current-theme');
         if(currentTheme === 'light'){
             document.documentElement.setAttribute('data-theme', 'light');
         }else{
@@ -38,9 +38,8 @@ const Navbar = ({...props}) => {
     }
 
     const changeTheme = () =>{
-        console.log('How many times changeTheme called...', currentTheme, localStorage.getItem('current-theme'))
         setCurrentTheme((currentTheme) => {
-            currentTheme = localStorage.getItem('current-theme');
+            // currentTheme = localStorage.getItem('current-theme');
             setOpen(prevValue =>  prevValue === true && false )            
             if(currentTheme === 'light'){
                 document.documentElement.setAttribute('data-theme', 'dark');

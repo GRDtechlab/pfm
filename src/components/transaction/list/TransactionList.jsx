@@ -36,8 +36,7 @@ const TransactionList = ({data}) =>{
                     <span className="button-icon"><i className='bi bi-plus' style={{fontSize:'1rem'}}> </i> Add Transaction</span>
                 </button>
             </div>
-            <div className='transaction-list-container shadow'>
-                
+            <div className='transaction-list-container '> 
                 <div className="head">
                    { showSearch === false && <h3 className='header-color'>Transaction History</h3> }
                     <div className= {showSearch === true ? ['search','show-search'].join(' ') : ['seach','hide-search'].join(' ') }>
@@ -52,7 +51,7 @@ const TransactionList = ({data}) =>{
                     <i className="bi bi-filter add" style={{fontSize:'1.5rem'}}></i>
                 </div>
                 <table>
-                    <thead>
+                    <thead className='shadow'>
                         <tr className='header-color'>
                             <th>Description</th>
                             <th>Amount</th>
@@ -77,7 +76,7 @@ const TransactionList = ({data}) =>{
 
                             if('dashboard' in rowTransactionRecord === false){
 
-                                return <tr key={rowTransactionRecord._id}>
+                                return <tr key={rowTransactionRecord._id} >
                                         <td>{rowTransactionRecord.transaction_description}</td>
                                         <td> { currency_formater.format (rowTransactionRecord.transaction_amount)}</td>
                                         <td>{ new Date(rowTransactionRecord.createdAt).toLocaleDateString() }</td>

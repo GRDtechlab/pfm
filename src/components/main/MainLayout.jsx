@@ -1,5 +1,4 @@
 import './main.css'
-
 import {  useState, useRef, useEffect } from 'react';
 
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
@@ -11,11 +10,12 @@ import { useGetCurrentUser } from '../../services/get-current-logged-in-user-hoo
 import { useIsUserLoggedInMutation } from '../../services/pfm-api';
 import { setCredintials } from '../../services/auth-slice';
 import { useDispatch } from 'react-redux';
+import Loader from '../loader/Loader';
 
 const MainLayout = () => {
     const mainElementRef = useRef();
     const [open,setOpen] = useState(false);
-    const [checkUserIsLoggedIn] = useIsUserLoggedInMutation()
+    const [checkUserIsLoggedIn,{isLoading}] = useIsUserLoggedInMutation()
     const currentUser = useGetCurrentUser();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -38,8 +38,13 @@ const MainLayout = () => {
         onCheckUserIsLoggedIn()
     },[])
     
+    if(!currentUser){
+        return  <Loader />
+    }
+
     return(
-        <> {currentUser && <div className='container'>
+        <> { <div className='container'>
+                
         <Navbar user={currentUser}/>
         {!isHide && <Sidebar open={open} setOpen={setOpen} currentUser={currentUser}/> }
 
@@ -56,6 +61,7 @@ const MainLayout = () => {
                 
         </>
     )
+    
 }
 
 export default MainLayout;

@@ -10,6 +10,7 @@ const DataLoaderHoc = WrapedComponent => props => {
     
 
     if(localError){
+        console.log({localError})
         if(localError.dashboardData === 0){     
             return <div className='ml-3'>
                         <Info title={'Dashboard Data is not available'} desctiption={'First, add dashboard data then you will able to add transactions'}>

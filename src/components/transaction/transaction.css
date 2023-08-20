@@ -78,6 +78,7 @@
   font-size: 16px;
   text-align: left;
   border-bottom: 1px solid var(--PFM-secondary);
+  background-color: var(--PFM-secondary);
 }
 
 .transaction-list-container table tbody tr:hover {
@@ -92,6 +93,7 @@
 }
 .transaction-list-container table td {
   padding: 8px;
+  border-bottom: 1px solid var(--PFM-secondary);
 }
 
 @media screen and (max-width: 1024px) {
