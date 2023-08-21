@@ -21,9 +21,10 @@ const Navbar = ({...props}) => {
 
     const onLogout= async()=>{
         try{
+            setOpen(prevValue =>  prevValue === true && false );
             const data = await onLoggedOut(user).unwrap();
             dispatch(logOut())
-            navigate('/public/login');
+            navigate('/public/home');
         }catch(catchError){
             console.log(catchError)
         }
@@ -40,7 +41,7 @@ const Navbar = ({...props}) => {
     const changeTheme = () =>{
         setCurrentTheme((currentTheme) => {
             // currentTheme = localStorage.getItem('current-theme');
-            setOpen(prevValue =>  prevValue === true && false )            
+            setOpen(prevValue =>  prevValue === true && false )
             if(currentTheme === 'light'){
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('current-theme','dark')
@@ -50,10 +51,7 @@ const Navbar = ({...props}) => {
                 localStorage.setItem('current-theme','light')
                 return 'light'
             }
-
-        })
-
-        
+        })        
     }
     return (
         <header className='shadow'>
@@ -63,7 +61,7 @@ const Navbar = ({...props}) => {
             </Link>
             <ul className={ open ? ['navbar-menu', 'active-menu'].join(' ') : 'navbar-menu'}>
                 
-                    <NavLink to='/' className={({isActive})=>(isActive ? 'active-link' : '')}>
+                    <NavLink onClick={() => setOpen(prevValue =>  prevValue === true && false )} to='/' className={({isActive})=>(isActive ? 'active-link' : '')}>
                         <li>Home </li>
                     </NavLink>
                 
@@ -73,9 +71,9 @@ const Navbar = ({...props}) => {
                     </NavLink>
                 
                 <li><a>Contact</a></li>
-                <a onClick={onLogout}>
+                <NavLink onClick={onLogout} to="/logout" className={({isActive})=>(isActive ? 'active-link' : '')}>
                     <li>Logout</li>
-                </a>
+                </NavLink>
                 <li className='disabled'>
                     <div className='navmenu-seperator'></div>
                 </li>

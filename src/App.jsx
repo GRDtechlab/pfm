@@ -13,6 +13,7 @@ import Signup from "./components/authentication/signup/Signup";
 import Login from "./components/authentication/login/Login";
 import PublicLayout from "./components/public/PublicLayout";
 import Landing from "./components/public/home/Landing";
+import Loader from "./components/loader/Loader";
 
 const Dashboard = lazy(() => import('./components/dashboard/Dashboard' /*webpackChunkName: "Dashboard-Lazy-Load"*/));
 const ListCmp = lazy(() => import('./components/list/ListCmp' /*webpackChunkName: "List-Lazy-Load"*/));
@@ -45,6 +46,12 @@ const router = createBrowserRouter([
                   { <Transaction /> }
                 </Suspense>
       },
+      {
+        path:'logout',
+        element: <Suspense fallback={<h1 className='ml-3'>Loggin out...</h1>}>
+                    { <Loader message="Logging out in progress" /> }
+                 </Suspense>
+      }
       
     ]
   },

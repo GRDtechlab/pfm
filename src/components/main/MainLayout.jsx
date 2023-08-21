@@ -54,7 +54,7 @@ const MainLayout = () => {
                     <i className="bi bi-list"></i>
                 </div>
             </div>
-            <Outlet context={{ someData: setIsHide, mainRef:mainElementRef, user:currentUser }}/>  {/* Outlet here all routes loads... */}
+            <Outlet context={{ hideSidebar: setIsHide, mainRef:mainElementRef, user:currentUser }}/>  {/* Outlet here all routes loads... */}
         </main>
             {/* <Footer/> */}
     </div>}       

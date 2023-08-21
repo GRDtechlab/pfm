@@ -14,13 +14,13 @@ const PublicNavbar = () =>{
                     <img src={logo} className='logo'/>
                 </Link>
                 <ul className={ open ? ['navbar-menu', 'active-menu'].join(' ') : 'navbar-menu'}>                    
-                        <NavLink to='/public/home' className={({isActive})=>(isActive ? 'active-link' : '')}>
+                        <NavLink onClick={() => setOpen(prevValue =>  prevValue === true && false )} to='/public/home' className={({isActive})=>(isActive ? 'active-link' : '')}>
                             <li>Home </li>
                         </NavLink>
-                        <NavLink to='/public/about' className={({isActive})=>(isActive ? 'active-link' : '')}>
+                        <NavLink onClick={() => setOpen(prevValue =>  prevValue === true && false )} to='/public/about' className={({isActive})=>(isActive ? 'active-link' : '')}>
                             <li>About </li>
                         </NavLink>
-                        <NavLink to='/public/login' className={({isActive})=>(isActive ? 'active-link' : '')}>
+                        <NavLink onClick={() => setOpen(prevValue =>  prevValue === true && false )} to='/public/login' className={({isActive})=>(isActive ? 'active-link' : '')}>
                             <li>Login </li>
                         </NavLink>
                 </ul>
