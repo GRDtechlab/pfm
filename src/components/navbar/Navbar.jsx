@@ -59,18 +59,12 @@ const Navbar = ({...props}) => {
             <Link to='/'>
                 <img src={logo} className='logo'/>
             </Link>
-            <ul className={ open ? ['navbar-menu', 'active-menu'].join(' ') : 'navbar-menu'}>
+            <ul className={ open ? ['navbar-menu', 'active-menu', 'container'].join(' ') : ['navbar-menu'].join(' ')}>
                 
                     <NavLink onClick={() => setOpen(prevValue =>  prevValue === true && false )} to='/' className={({isActive})=>(isActive ? 'active-link' : '')}>
                         <li>Home </li>
                     </NavLink>
                 
-                
-                    <NavLink to="/about" className={({isActive})=>(isActive ? 'active-link' : '')}>
-                        <li>About</li>
-                    </NavLink>
-                
-                <li><a>Contact</a></li>
                 <NavLink onClick={onLogout} to="/logout" className={({isActive})=>(isActive ? 'active-link' : '')}>
                     <li>Logout</li>
                 </NavLink>

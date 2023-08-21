@@ -13,7 +13,7 @@ const PublicNavbar = () =>{
                 <Link to='/public/home'>
                     <img src={logo} className='logo'/>
                 </Link>
-                <ul className={ open ? ['navbar-menu', 'active-menu'].join(' ') : 'navbar-menu'}>                    
+                <ul className={ open ? ['navbar-menu', 'active-menu','container'].join(' ') : ['navbar-menu'].join(' ')}>                    
                         <NavLink onClick={() => setOpen(prevValue =>  prevValue === true && false )} to='/public/home' className={({isActive})=>(isActive ? 'active-link' : '')}>
                             <li>Home </li>
                         </NavLink>

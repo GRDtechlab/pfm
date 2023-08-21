@@ -43,7 +43,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+html {
+  width: 100vw;
+}
 body {
   font-size: 1rem;
   line-height: 1.3;

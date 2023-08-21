@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.first-section::before {
+/* .first-section::before {
   position: absolute;
   content: "";
   background: var(--PFM-secondary);
@@ -17,7 +17,7 @@
   bottom: 0;
   right: 0;
   border-radius: 20px 0 0 20px;
-}
+} */
 
 .left-part {
   width: 50%;
@@ -72,11 +72,22 @@
   padding-left: 1rem;
   padding-right: 1rem;
 }
+.right-part::before {
+  position: absolute;
+  content: "";
+  background: var(--PFM-secondary);
+  width: 80%;
+  height: 62%;
+  bottom: 0;
+  right: 0;
+  border-radius: 20px 0 0 20px;
+  z-index: -9;
+}
 .ladingImage {
   width: 400px;
   height: 400px;
   position: relative;
-  right: -120px;
+  right: -50px;
   top: -50px;
 }
 
