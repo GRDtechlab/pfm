@@ -60,20 +60,33 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .mobile-menu-header {
+    position: absolute;
+    top: 25px;
+    left: 10px;
+  }
   .mobile-menu {
     display: block;
     cursor: pointer;
     z-index: 10;
+    border-radius: 50%;
+    color: var(--PFM-main-bg-color-light);
+    background-color: var(--PFM-primary-dark);
   }
   .nav-menu-icon:hover {
     color: var(--PFM-primary);
     background-color: var(--PFM-main-bg-color);
-    border-radius: 5px;
   }
   .mobile-menu i {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 500;
     transition: 0.3s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
   }
   .navbar-menu {
     display: flex;

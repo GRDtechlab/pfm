@@ -25,6 +25,33 @@
   padding-left: 1rem;
   padding-right: 1rem;
 }
+.left-part .developer-label {
+  margin-top: 30px;
+}
+.left-part .developer {
+  margin-top: 8px;
+  color: var(--PFM-main-bg-color-light);
+  background-color: var(--PFM-primary-dark);
+  line-height: 1.5;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+.left-part .developer .item {
+  text-align: center;
+}
+.left-part .developer .item label {
+  color: var(--PFM-card-bg-color);
+}
+.left-part .developer .item h4 i {
+  color: var(--PFM-secondary);
+}
+.left-part .developer .item h4 {
+  letter-spacing: 1px;
+}
 .left-part h1 {
   font-weight: 500;
   font-size: 57.6px;
@@ -284,9 +311,29 @@
   .ladingImage {
     right: -25px !important;
   }
+  .left-part .developer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .left-part .developer .item {
+    text-align: left;
+  }
+  .left-part .developer .item h4 {
+    font-size: 0.8rem;
+  }
 }
 @media only screen and (max-width: 576px) {
   .left-part .action {
     flex-direction: column;
+  }
+  .left-part .developer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .left-part .developer .item {
+    text-align: left;
+  }
+  .left-part .developer .item h4 {
+    font-size: 0.8rem;
   }
 }

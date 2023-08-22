@@ -12,6 +12,18 @@ const Landing = () =>{
             <div className='first-section'>
                 <div className="left-part">
                     <h1 className='header-color-dark'>Manage your Personal Finance easily.</h1>
+                    <h4 className='developer-label header-color'>Developed By:</h4>
+                    <div className="developer">
+                    
+                        <div className='item'>
+                            {/* <label> Developed By</label> */}
+                            <h4> <i className="bi bi-person-fill"></i> Gaurang Dhorda</h4>
+                        </div>
+                        <div className='item'>
+                            {/* <label> Email </label> */}
+                            <h4><i className="bi bi-envelope-fill"></i> grdtechlab@gmail.com</h4>
+                        </div>
+                    </div>
                     <h3 className='header-color'>
                         Easily create your account and start managing your monthy expenses and more! You can manage and get track records of monthy savings target as well.
                     </h3>
