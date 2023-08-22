@@ -81,3 +81,22 @@
     margin-left: 1.5em;
   }
 }
+@media screen and (max-width: 640px) {
+  .main-dashboard .head-title {
+    flex-wrap: nowrap;
+  }
+  .left {
+    padding: 0px !important;
+    flex: 1;
+  }
+  .main-dashboard .head-title .left h1 {
+    font-size: 24px;
+    padding: 0.3rem;
+  }
+}
+
+@media screen and (max-width: 475px) {
+  .main-dashboard .head-title {
+    gap: 0px;
+  }
+}

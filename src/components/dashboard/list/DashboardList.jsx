@@ -56,14 +56,14 @@ const DashboardList = ({data, user}) =>{
             </div>
                 <a href="#" className="btn btn-primary shadow">
                 <i className="bx bxs-cloud-download"></i>
-                <span className="text">Download_PDF</span>
+                <span className="text">Download PDF</span>
             </a>
         </div>
         <div className='action-header'>
             <h3 className='header-color'> {currentMonth} {currentYear} </h3>
-            <i className='bi bi-pencil add' onClick={onEdit}></i>
+            <i className='bi bi-pencil add' title='Edit Dashboard Record' onClick={onEdit}></i>
         </div>
-        <div className='p-color'  style={{display:'flex', gap:'8px'}} >Last Updated At: <h4 className='p-color'> {new Date(dashboardData.updatedAt).toLocaleDateString()} </h4> </div>
+        <div className='p-color'  style={{display:'flex', gap:'8px'}} >Last Updated: <h4 className='p-color' title='DD/MM/YYYY - HH:MM:SS am/pm format'> {new Date(dashboardData.updatedAt).toLocaleDateString()} - <span> {new Date(dashboardData.updatedAt).toLocaleTimeString()} </span> </h4> </div>
         <ul className="box-info">
             <li className='shadow grandtotal'>
                 <i className="bx bi bi-currency-rupee"></i>

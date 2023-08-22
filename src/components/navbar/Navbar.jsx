@@ -59,19 +59,24 @@ const Navbar = ({...props}) => {
             <Link to='/'>
                 <img src={logo} className='logo'/>
             </Link>
+            
             <ul className={ open ? ['navbar-menu', 'active-menu', 'container'].join(' ') : ['navbar-menu'].join(' ')}>
-                
+                {
+                    open && <div className='mobile-menu-header'>
+                                <h4>Menu</h4>
+                                <p className='p-color'>Select your option</p>
+                            </div>
+                }
                     <NavLink onClick={() => setOpen(prevValue =>  prevValue === true && false )} to='/' className={({isActive})=>(isActive ? 'active-link' : '')}>
                         <li>Home </li>
                     </NavLink>
-                
-                <NavLink onClick={onLogout} to="/logout" className={({isActive})=>(isActive ? 'active-link' : '')}>
-                    <li>Logout</li>
-                </NavLink>
+                <li onClick={changeTheme } > <span>Theme</span> <i className="bi bi-moon"></i></li>
                 <li className='disabled'>
                     <div className='navmenu-seperator'></div>
                 </li>
-                <li onClick={changeTheme } > <i className="bi bi-moon"></i></li>
+                <NavLink onClick={onLogout} to="/logout" className={({isActive})=>(isActive ? 'active-link' : '')}>
+                    <li>Logout</li>
+                </NavLink>
             </ul>
             <div className='mobile-menu' onClick={()=> setOpen(!open)}>
             {open ? <i className="bi bi-x-lg nav-menu-icon"></i> : <i className="bi bi-list nav-menu-icon"></i> } 

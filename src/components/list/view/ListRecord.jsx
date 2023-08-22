@@ -18,7 +18,7 @@ const ListRecord = ({data}) => {
     }
 
     const onEdit = async (currentRecord) =>{
-        let isConfirm = await confirm({title:'defaultRecordEdit', content:UpdateList, component: Modal, dashboardData: currentRecord})
+        let isConfirm = await confirm({title:'Edit Record', content:UpdateList, component: Modal, dashboardData: currentRecord})
     }
 
     const onAdd = async () => {

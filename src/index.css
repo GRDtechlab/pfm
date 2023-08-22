@@ -112,6 +112,12 @@ body ul {
   }
 }
 
+@media screen and (max-width: 640px) {
+  html {
+    width: auto;
+  }
+}
+
 .header-color {
   color: var(--PFM-header-color);
 }
