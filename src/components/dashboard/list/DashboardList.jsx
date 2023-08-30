@@ -8,6 +8,7 @@ import UpdateDashboard from '../update/UpdateDashboard';
 import currency_formater from "../../../Utils/currency-formatter";
 import Info from '../../UI/info/Info';
 import useConfirm from '../../modal/confirm/ConfirmProvider';
+import BarChart from '../../chart/bar/BarChart';
 
 const DashboardList = ({data, user}) =>{
     const confirm = useConfirm();
@@ -64,6 +65,7 @@ const DashboardList = ({data, user}) =>{
             <i className='bi bi-pencil add' title='Edit Dashboard Record' onClick={onEdit}></i>
         </div>
         <div className='p-color'  style={{display:'flex', gap:'8px'}} >Last Updated: <h4 className='p-color' title='DD/MM/YYYY - HH:MM:SS am/pm format'> {new Date(dashboardData.updatedAt).toLocaleDateString()} - <span> {new Date(dashboardData.updatedAt).toLocaleTimeString()} </span> </h4> </div>
+        
         <ul className="box-info">
             <li className='shadow grandtotal'>
                 <i className="bx bi bi-currency-rupee"></i>
@@ -95,6 +97,7 @@ const DashboardList = ({data, user}) =>{
             </span>
             </li>
         </ul>
+        
         <hr style={{marginTop:'1em'}}/>
         <h2 className='header-color'>Incomes</h2>
         <ul className="box-info">
@@ -113,6 +116,9 @@ const DashboardList = ({data, user}) =>{
             </span>
             </li>
         </ul>
+        <hr style={{marginTop:'1em'}}/>
+        <h2 className='header-color'>Chart</h2>
+        <BarChart dashboardData={dashboardData} />
     </div>
     </>
 }
