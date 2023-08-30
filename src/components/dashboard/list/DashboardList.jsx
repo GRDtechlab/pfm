@@ -117,8 +117,7 @@ const DashboardList = ({data, user}) =>{
             </li>
         </ul>
         <hr style={{marginTop:'1em'}}/>
-        <h2 className='header-color'>Chart</h2>
-        <BarChart dashboardData={dashboardData} />
+
     </div>
     </>
 }
