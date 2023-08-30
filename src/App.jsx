@@ -14,6 +14,8 @@ import Login from "./components/authentication/login/Login";
 import PublicLayout from "./components/public/PublicLayout";
 import Landing from "./components/public/home/Landing";
 import Loader from "./components/loader/Loader";
+import BarChart from "./components/chart/bar/BarChart";
+import Chart from "./components/chart/bar/Chart";
 
 const Dashboard = lazy(() => import('./components/dashboard/Dashboard' /*webpackChunkName: "Dashboard-Lazy-Load"*/));
 const ListCmp = lazy(() => import('./components/list/ListCmp' /*webpackChunkName: "List-Lazy-Load"*/));
@@ -44,6 +46,12 @@ const router = createBrowserRouter([
         path:'transaction',
         element: <Suspense fallback={<h1 className='ml-3'>Loading Transactions...</h1>}>
                   { <Transaction /> }
+                </Suspense>
+      },
+      {
+        path:'chart',
+        element: <Suspense fallback={<h1 className='ml-3'>Loading Transactions...</h1>}>
+                  { <Chart /> }
                 </Suspense>
       },
       {
