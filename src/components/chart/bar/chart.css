@@ -12,6 +12,17 @@
   grid-gap: 16px;
   flex-wrap: wrap;
 }
+.main-chart label {
+  padding-right: 1rem;
+  margin-top: 0.5em;
+}
+.main-chart select {
+  padding: 10px;
+  background-color: var(--PFM-secondary);
+  color: var(--PFM-font-color);
+  border: none;
+  font-size: medium;
+}
 .left {
   padding: 0px !important;
 }
