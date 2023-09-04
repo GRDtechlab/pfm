@@ -12,7 +12,7 @@ const Submenu = ({title, headicon, submenu_item}) =>{
     </h4>
     {  open && submenu_item?.map((submenu, index) => (
         <div className='submenu' key={index}>
-         <h5>{submenu}</h5>
+            {submenu}
         </div>
     )) 
     }
