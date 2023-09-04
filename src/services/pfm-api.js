@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const pfmApi = createApi({
   reducerPath: "pfmApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://pfm-api.vercel.app/api/pfm", // "http://localhost:5001/api/pfm",
+    baseUrl: "http://localhost:5001/api/pfm", //  "https://pfm-api.vercel.app/api/pfm"
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       // const token = getState().auth.token;
@@ -77,6 +77,12 @@ export const pfmApi = createApi({
       }),
       invalidatesTags: ["transactions", "dashboard"],
     }),
+    getPreviousMonthsChartData: builder.query({
+      query: ({ user_id }) => ({
+        url: `/reports/previousMonths/${user_id}`,
+        method: "GET",
+      }),
+    }),
     getUsersById: builder.query({
       query: ({ user_id }) => ({
         url: `/user/${user_id}`,
@@ -133,6 +139,7 @@ export const {
   useDeleteRecordsMutation,
   useGetTransactionQuery,
   useAddTransactionMutation,
+  useGetPreviousMonthsChartDataQuery,
   useGetUsersByIdQuery,
   useAddNewUserRecordMutation,
   useLoginMutation,

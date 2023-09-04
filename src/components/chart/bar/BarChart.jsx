@@ -33,30 +33,43 @@ ChartJS.register(
     },
   };
   
-  
-  
-
-  export const BarChart = ({dashboardData}) =>{
+  export const BarChart = ({dashboardData, filterData}) =>{
     console.log(new Date(dashboardData.createdAt).getMonth())
     const currentMonth = new Date().getMonth();
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].splice(currentMonth, 12 -currentMonth);
+    
+    const length = filterData?.length <= 0 ? 1 : filterData?.length+1;
+    const currentMonthIndex = length > 1 ? 1 : 0;
+    // console.log(length, currentMonthIndex)
+    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].splice(currentMonth - currentMonthIndex , length);
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    let chartData = [];
+    if(filterData?.length === 0){
+      chartData.push({base_limit_pm:dashboardData['base_limit_pm'], limit_pm: dashboardData['limit_pm']})
+    }
+    if(filterData?.length >=1){
+      const data = filterData?.map(({base_limit_pm, limit_pm}, index) => {
+        return    {base_limit_pm, limit_pm}
+      })
+      data.push({base_limit_pm:dashboardData['base_limit_pm'], limit_pm: dashboardData['limit_pm']})
+      chartData.push(...data)
+    }
     
      const data = {
         labels,
         datasets: [
           {
             label: 'Target p/m to be',
-            data: [dashboardData?.base_limit_pm],
+            data: chartData.map(({base_limit_pm}) => (base_limit_pm)),
             backgroundColor: 'rgba(53, 162, 235, 0.5)'
           },
           {
             label: 'Actual Savings p/m',
-            data: [dashboardData?.limit_pm],
+            data: chartData.map(({limit_pm}) => (limit_pm)),
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
           },
         ],
       };
-      
+      console.log(data)
     return <Bar options={options} data={data} />
   }
 

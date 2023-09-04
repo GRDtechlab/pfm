@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { NavLink } from 'react-router-dom'
 import './sidebar.css'
+import Submenu from './Submenu';
 
 const Sidebar = (props) =>{
     const {currentUser:user} = props;    
@@ -24,9 +25,12 @@ const Sidebar = (props) =>{
                         {/* <a href="#"> <i className="fa fa-newspaper-o"></i> List</a> */}
                         <NavLink onClick={() => props.setOpen(false)} to='/list' className={({isActive})=>(isActive ? 'active-link' : '')} ><i className="bi bi-list-check"></i>  List </NavLink>
                         <NavLink onClick={() => props.setOpen(false)} to='/transaction' className={({isActive})=>(isActive ? 'active-link' : '')} > <i className="bi bi-credit-card-fill"></i> Transaction</NavLink>
-                        <NavLink onClick={()=> props.setOpen(false)} to='/chart' className={({isActive}) => (isActive ? 'active-link' :'')}> 
-                                <i className="bi bi-graph-up"></i> Chart
-                        </NavLink>
+                        
+                        {/* NavLink onClick={()=> props.setOpen(false)} to='/chart' className={({isActive}) => (isActive ? 'active-link' :'')} */}
+                                
+                        <Submenu title="Reports" headicon={<i className="bi bi-graph-up"></i>} submenu_item={[
+                            <NavLink onClick={()=> props.setOpen(false)} to='/chart' className={({isActive}) => (isActive ? 'active-link' :'')}>Chart</NavLink>
+                        ]} />
                         
                         <a href="#"> <i className="fa fa-envelope-o"></i> Message</a>
                         <a href="#"> <i className="fa fa-cog"></i> Settings</a>
