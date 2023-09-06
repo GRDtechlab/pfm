@@ -6,9 +6,11 @@ import logo from '../../assets/logo.jpg'
 import { useLogoutMutation } from '../../services/pfm-api';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../services/auth-slice';
+import PopupMenu from '../UI/dropdown/popupmenu/PopupMenu';
 
 const Navbar = ({...props}) => {
     const {user} = props;
+    const userProfileText = `${user?.firstname[0]}${user?.lastname[0]}`;
     const [open,setOpen] = useState(false);
     const navigate= useNavigate();
     const [onLoggedOut] = useLogoutMutation();
@@ -74,9 +76,23 @@ const Navbar = ({...props}) => {
                 <li className='disabled'>
                     <div className='navmenu-seperator'></div>
                 </li>
-                <NavLink onClick={onLogout} to="/logout" className={({isActive})=>(isActive ? 'active-link' : '')}>
-                    <li>Logout</li>
-                </NavLink>
+                
+                <PopupMenu>
+                    <PopupMenu.Header>
+                        <li>
+                                <i className="bi bi-person-fill"></i>
+                                <span title={`welcome ${user?.firstname}!`}>{userProfileText}
+                                
+                                </span>
+                                  {/* <i className="bi bi-caret-down-fill"></i> */}
+                        </li> 
+                    </PopupMenu.Header>
+                    <PopupMenu.Menu>
+                        <NavLink onClick={onLogout} to="/logout" className={({isActive})=>(isActive ? 'active-link' : '')}>
+                             <span> Logout  </span>
+                        </NavLink>
+                    </PopupMenu.Menu>
+                </PopupMenu>
             </ul>
             <div className='mobile-menu' onClick={()=> setOpen(!open)}>
             {open ? <i className="bi bi-x-lg nav-menu-icon"></i> : <i className="bi bi-list nav-menu-icon"></i> } 
