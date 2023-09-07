@@ -395,6 +395,12 @@ td {
   border-radius: 50% !important;
   color: var(--PFM-primary-dark) !important;
 }
+.hr {
+  background-color: var(--PFM-font-color);
+  border: 0;
+  height: 1px;
+  opacity: 0.5;
+}
 .info {
   width: calc(100% - 20px);
   padding: 1rem;

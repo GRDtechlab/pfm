@@ -61,7 +61,7 @@ const Navbar = ({...props}) => {
             <Link to='/'>
                 <img src={logo} className='logo'/>
             </Link>
-            
+            <div style={{display:'flex', alignItems:'center'}}>
             <ul className={ open ? ['navbar-menu', 'active-menu', 'container'].join(' ') : ['navbar-menu'].join(' ')}>
                 {
                     open && <div className='mobile-menu-header'>
@@ -73,10 +73,18 @@ const Navbar = ({...props}) => {
                         <li>Home </li>
                     </NavLink>
                 <li onClick={changeTheme } > <span>Theme</span> <i className="bi bi-moon"></i></li>
-                <li className='disabled'>
-                    <div className='navmenu-seperator'></div>
-                </li>
+                {!open && <li className='disabled'>
+                            <div className='navmenu-seperator'></div>
+                          </li>
+                }
                 
+                
+            </ul>
+            
+                <div className='mobile-menu' onClick={()=> setOpen(!open)}>
+                    {open ? <i className="bi bi-x-lg nav-menu-icon"></i> : <i className="bi bi-list nav-menu-icon"></i> } 
+                </div>
+               {!open &&  <ul style={{display:'flex', cursor:'pointer'}} >
                 <PopupMenu>
                     <PopupMenu.Header>
                         <li>
@@ -88,14 +96,24 @@ const Navbar = ({...props}) => {
                         </li> 
                     </PopupMenu.Header>
                     <PopupMenu.Menu>
-                        <NavLink onClick={onLogout} to="/logout" className={({isActive})=>(isActive ? 'active-link' : '')}>
-                             <span> Logout  </span>
-                        </NavLink>
+                        <div className='menu'>
+                                <div style={{display:'flex', alignItems:'center'}}>
+                                    <i className="bi bi-person-fill"></i>
+                                    <div style={{display:'flex', flexDirection:'column'}}>
+                                        <span className='font-color'>{user?.firstname} {user?.lastname}</span>
+                                        <span className='p-color'>{user?.email}</span>
+                                    </div>
+                                </div>
+                                <hr className='hr'/>
+                                <NavLink onClick={onLogout} to="/logout" className={({isActive})=>(isActive ? 'active-link' : '')}>
+                                <i className="bi bi-power"></i>
+                                    <span> Logout  </span>
+                                </NavLink>
+                        </div>
                     </PopupMenu.Menu>
                 </PopupMenu>
-            </ul>
-            <div className='mobile-menu' onClick={()=> setOpen(!open)}>
-            {open ? <i className="bi bi-x-lg nav-menu-icon"></i> : <i className="bi bi-list nav-menu-icon"></i> } 
+                </ul>
+                }
             </div>
         </nav>        
         </header>

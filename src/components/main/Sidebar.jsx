@@ -32,8 +32,7 @@ const Sidebar = (props) =>{
                             <NavLink onClick={()=> props.setOpen(false)} to='/chart' className={({isActive}) => (isActive ? 'active-link' :'')}>Chart</NavLink>
                         ]} />
                         
-                        <a href="#"> <i className="fa fa-envelope-o"></i> Message</a>
-                        <a href="#"> <i className="fa fa-cog"></i> Settings</a>
+                        <a href="#"> <i className="bi bi-gear"></i> Settings</a>
                     </div>
                 </div>
                 <div className= {props.open ? ['backdrop','show-backdrop'].join(' ') : 'backdrop' } onClick={()=> props.setOpen(false)} ></div>
