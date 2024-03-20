@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const pfmApi = createApi({
   reducerPath: "pfmApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://pfm-api.vercel.app/api/pfm", //"http://localhost:5001/api/pfm",
+    baseUrl: "https://pfm-api.vercel.app/api/pfm", //"http://localhost:5001/api/pfm"
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       // const token = getState().auth.token;

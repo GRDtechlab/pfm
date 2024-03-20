@@ -2,7 +2,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
-import { Suspense, lazy} from 'react';
+import { Suspense, lazy, useEffect} from 'react';
 import {  RouterProvider, createBrowserRouter} from 'react-router-dom';
 import { ToastContainer} from 'react-toastify';
 

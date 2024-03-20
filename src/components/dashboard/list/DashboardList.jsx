@@ -29,7 +29,8 @@ const DashboardList = ({data, user}) =>{
     })
 
     const month = ['January','February','March','April','June','July','August', 'September','October','November','December'];
-    const currentMonth = month[new Date().getMonth() - 1];
+    // const currentMonth = month[new Date().getMonth() - 1];
+    const currentMonth = month[new Date().getMonth()];
     const currentYear = new Date().getFullYear();
 
     const onAdd = async () => {

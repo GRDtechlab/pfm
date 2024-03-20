@@ -14,7 +14,7 @@ const UpdateDashboard = ({record:dashboardData, closeModal}) => {
     const [addTransaction] = useAddTransactionMutation();
 
     const updateDashboardFormSubmit = (e, fieldName) => {
-
+        console.log(getValues())
         if( isNaN (getValues()[fieldName])){
              reset({...getValues(), [fieldName]:0});
         }
@@ -76,6 +76,7 @@ const UpdateDashboard = ({record:dashboardData, closeModal}) => {
         await addTransaction({user_id:dashboardUpdateData.user_id, dashboard:{isUpdated:true, dashboard_update_id:'updateID_Dashboard', grand_total:dashboardUpdateData.grand_total, description:'Updated by Self'}})
     }
     const customHandleSubmit = (formsValue) =>{
+
         formsValue.radio.forEach((eachRowRadio) => {
             formsValue = {...formsValue, [eachRowRadio['fieldType']] : eachRowRadio['updatedValue'] === 0 ? formsValue[eachRowRadio['fieldType']] :  eachRowRadio['updatedValue']}
         })
@@ -87,6 +88,7 @@ const UpdateDashboard = ({record:dashboardData, closeModal}) => {
         // let salaryAfterTotalCredited = salaryAfterTotalDebited + formsValue.transactions.credited;
         // let availableBalance = salaryAfterTotalCredited - formsValue.limit_pm;
         // let grandTotal = availableBalance + +formsValue.limit_pm + +formsValue.total_savings;
+        
         let grandTotal = +formsValue.availableBalance + +formsValue.limit_pm + +formsValue.total_savings;
 
         let finalUpdate = {...formsValue,  grand_total:grandTotal  }
@@ -105,7 +107,8 @@ const UpdateDashboard = ({record:dashboardData, closeModal}) => {
             reset({radio:[
                 {index:null,type:'', value:0, updatedValue:0, label:'Current Total Savings', fieldType:'total_savings', isError:false},
                 {index:null,type:'', value:0, updatedValue:0, label:'Current Limit p/m', fieldType:'limit_pm', isError:false},
-                {index:null, type:'', value:0, updatedValue:0, label:'Balance', fieldType:'availableBalance', isError:false}
+                {index:null, type:'', value:0, updatedValue:0, label:'Balance', fieldType:'availableBalance', isError:false},
+                
             ], ...dashboardData})
         }
         
