@@ -146,6 +146,10 @@ body ul {
   color: var(--PFM-header-color-dark) !important;
 }
 
+.border-bottom-light-orage-color {
+  border-bottom: 1px solid var(--PFM-light-orange-color) !important;
+}
+
 /*
     Common button css design...
 */

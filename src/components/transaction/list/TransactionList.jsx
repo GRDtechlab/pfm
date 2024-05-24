@@ -14,6 +14,7 @@ const TransactionList = ({data}) =>{
     const onAdd =() => {
         let isConfirm = confirm({title: 'Add New Transaction', component: Modal, content: TransactionAdd})
     }
+    console.log({data})
 
     if(data && data.length === 0){
         return <div> 
@@ -33,7 +34,7 @@ const TransactionList = ({data}) =>{
                     <h1 className='header-color'>Transaction</h1>
                 </div>
                 <button className="btn btn-primary" onClick={onAdd} >
-                    <span className="button-icon"><i className='bi bi-plus' style={{fontSize:'1rem'}}> </i> Add Transaction</span>
+                    <span className="button-icon"><i className='bi bi-plus' style={{fontSize:'1rem'}}> </i> Add Entry</span>
                 </button>
             </div>
             <div className='transaction-list-container '> 
@@ -53,6 +54,7 @@ const TransactionList = ({data}) =>{
                 <table>
                     <thead className='shadow'>
                         <tr className='header-color'>
+                            <th>Sr.No</th>
                             <th>Description</th>
                             <th>Amount</th>
                             <th>Date</th>
@@ -62,10 +64,11 @@ const TransactionList = ({data}) =>{
                     </thead>
                     <tbody>
                         {
-                            data.map(rowTransactionRecord => {
+                            data.map((rowTransactionRecord, index) => {
                             
                             if('dashboard' in rowTransactionRecord === true ){
                                 return <tr  key={rowTransactionRecord._id}>
+                                        <td>{data.length - index}</td>
                                         <td colSpan={2} >{rowTransactionRecord.dashboard.description}</td>
                                         
                                         <td></td>
@@ -77,6 +80,7 @@ const TransactionList = ({data}) =>{
                             if('dashboard' in rowTransactionRecord === false){
 
                                 return <tr key={rowTransactionRecord._id} >
+                                        <td>{data.length - index}</td>
                                         <td>{rowTransactionRecord.transaction_description}</td>
                                         <td> { currency_formater.format (rowTransactionRecord.transaction_amount)}</td>
                                         <td>{ new Date(rowTransactionRecord.createdAt).toLocaleDateString() }</td>
